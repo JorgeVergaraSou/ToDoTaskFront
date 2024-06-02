@@ -1,0 +1,8 @@
+export { Contacto } from './Contacto'
+export { Inicio } from './Inicio'
+export { Login } from './Login'
+export { Mascotas } from './Mascotas'
+export { Nosotros } from './Nosotros'
+export { Registro } from './Registro'
+export { CrearMascota } from './CrearMascota'
+export { NuevoPost} from './NuevoPost'
