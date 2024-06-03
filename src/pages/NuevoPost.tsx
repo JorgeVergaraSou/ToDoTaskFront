@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CrearMascota from './CrearMascota_old1'; // Asumiendo que CrearMascota está en el mismo directorio
+// import CrearMascota from './CrearMascota_old1'; // Asumiendo que CrearMascota está en el mismo directorio
 import Modal from 'react-modal';
 
 // Inicializar react-modal con el elemento raíz de la aplicación (si no se ha hecho ya en otro lugar)
@@ -138,7 +138,7 @@ export const NuevoPost: React.FC = () => {
                 onRequestClose={() => setModalIsOpen(false)}
                 contentLabel="Crear Mascota"
             >
-                <CrearMascota postId={postId} />
+                {/* <CrearMascota postId={postId} /> */}
                 <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
             </Modal>
         </>
