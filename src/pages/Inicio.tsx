@@ -33,7 +33,7 @@ export const Inicio: React.FC = () => {
             ¿Perdiste a tu preciado amigo de cuatro patas?
           </h2>
           <p>
-            No te preocupes, estamos acá para ayudarte. Publicá detalles sobre
+            Publicá detalles sobre
             tu mascota perdida, incluyendo una descripción, fotos y la ubicación
             donde fue vista por última vez. Nuestra comunidad está lista para
             ayudarte a difundir la información y reunirte con tu peludo amigo lo
@@ -45,7 +45,6 @@ export const Inicio: React.FC = () => {
             ¿Encontraste una mascota perdida?
           </h2>
           <p>
-            Tu acción puede marcar la diferencia en la vida de una familia.
             Publicá los detalles sobre la mascota que encontraste para ayudar a
             reunirla con su hogar. Juntos, podemos hacer que cada mascota
             perdida regrese a casa de manera segura.
