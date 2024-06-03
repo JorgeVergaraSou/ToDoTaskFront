@@ -11,7 +11,7 @@ export const NavButton: React.FC<NavButtonProps> = ({
   ...props
 }) => {
   return (
-    <Link {...props} className={twMerge('navButton', props.className)} >
+    <Link {...props} className={twMerge('nav-button no-underline', props.className)} >
       {text}
       {props.children}
     </Link>

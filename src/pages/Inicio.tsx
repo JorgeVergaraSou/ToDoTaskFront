@@ -64,6 +64,20 @@ export const Inicio: React.FC = () => {
           cada mascota perdida tiene un camino de regreso a casa. ¡Súmate y
           ayudemos a que eso suceda!
         </p>
+        <p>
+          Sumate a nuestra comunidad de amantes de los animales y juntos
+          trabajaremos para garantizar que cada mascota reciba el amor y el
+          cuidado que merece. En Lost & Founds Pets!, creemos que
+          cada mascota perdida tiene un camino de regreso a casa. ¡Súmate y
+          ayudemos a que eso suceda!
+        </p>
+        <p>
+          Sumate a nuestra comunidad de amantes de los animales y juntos
+          trabajaremos para garantizar que cada mascota reciba el amor y el
+          cuidado que merece. En Lost & Founds Pets!, creemos que
+          cada mascota perdida tiene un camino de regreso a casa. ¡Súmate y
+          ayudemos a que eso suceda!
+        </p>
       </div>
 
     </>
