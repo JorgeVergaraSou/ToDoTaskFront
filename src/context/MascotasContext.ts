@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react'
-import { User, UserContextType } from '../types/MascotasTypes'
+import { createContext } from 'react'
+import { UserContextType } from '../types/MascotasTypes'
 
-const UserContext = createContext<UserContextType | undefined>(undefined)
+export const UserContext = createContext<UserContextType | undefined>(undefined)

@@ -8,9 +8,9 @@ export const Nosotros: React.FC = () => {
         <p>
           En Lost and Found Pets nos dedicamos a ayudar a reunir a las mascotas
           con sus dueños y a encontrar nuevos hogares para los animales
-          perdidos. Con la experiencia en el cuidado y
-          bienestar animal, nos especializamos en brindar atención integral a
-          pequeños y grandes animales.
+          perdidos. Con la experiencia en el cuidado y bienestar animal, nos
+          especializamos en brindar atención integral a pequeños y grandes
+          animales.
         </p>
         <p>
           Además, contamos con laboratorios clínicos e instrumentos de

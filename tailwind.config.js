@@ -35,6 +35,16 @@ export default {
           grade4: '#57BEA2',
           grade5: '#88D9C3'
         }
+      },
+      animation: {
+        'underline-slide': 'underlineSlide 0.5s ease-out',
+      },
+      keyframes: {
+        underlineSlide: {
+          '0%': { textDecorationLine: 'none' },
+          '50%': { textDecorationLine: 'underline', textDecorationStart: 'center' },
+          '100%': { textDecorationLine: 'underline', textDecorationStart: '0%', textDecorationEnd: '100%' },
+        },
       }
     }
   },

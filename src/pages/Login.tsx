@@ -88,7 +88,7 @@ export const Login: React.FC = () => {
                 className='form-control'
                 type='text'
                 placeholder='Email'
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className='mb-3'>
@@ -101,7 +101,7 @@ export const Login: React.FC = () => {
                 className='form-control'
                 type='password'
                 placeholder='Contraseña'
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             {error && <p>{error}</p>}
@@ -109,14 +109,13 @@ export const Login: React.FC = () => {
               Iniciar sesión
             </button>
             <button
-            className='btn btn-primary mx-1'
-            type='button'
-            onClick={() => {
-              navigate(routes.registration.url)
-            }}
-          >
-            Crear cuenta
-          </button>
+              className='btn btn-primary mx-1'
+              type='button'
+              onClick={() => {
+                navigate(routes.registration.url)
+              }}>
+              Crear cuenta
+            </button>
           </form>
         </div>
         {/* <div id='register'>

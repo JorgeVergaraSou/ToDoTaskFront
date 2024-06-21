@@ -26,8 +26,10 @@ export const Card: React.FC<CardProps> = ({
         </div>
         {petTags !== undefined && (
           <div className='px-6 pt-4 pb-2'>
-            {petTags.map(tag => (
-              <span className='inline-block bg-gray-900 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+            {petTags.map((tag, index) => (
+              <span
+                key={`tag-${index}`}
+                className='inline-block bg-gray-900 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
                 {tag}
               </span>
             ))}

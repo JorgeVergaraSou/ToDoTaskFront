@@ -36,8 +36,7 @@ export const Contacto: React.FC = () => {
           <div>
             <label
               htmlFor='name'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
+              className='block text-gray-700 text-sm font-bold mb-2'>
               Nombre:
             </label>
             <input
@@ -53,8 +52,7 @@ export const Contacto: React.FC = () => {
           <div>
             <label
               htmlFor='email'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
+              className='block text-gray-700 text-sm font-bold mb-2'>
               Correo electrónico:
             </label>
             <input
@@ -70,8 +68,7 @@ export const Contacto: React.FC = () => {
           <div>
             <label
               htmlFor='message'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
+              className='block text-gray-700 text-sm font-bold mb-2'>
               Mensaje:
             </label>
             <textarea
@@ -85,8 +82,7 @@ export const Contacto: React.FC = () => {
           </div>
           <button
             type='submit'
-            className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-          >
+            className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
             Enviar
           </button>
         </form>

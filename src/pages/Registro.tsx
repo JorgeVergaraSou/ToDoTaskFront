@@ -76,7 +76,7 @@ export const Registro: React.FC = () => {
             name='name'
             className='form-control mb-2'
             value={name}
-            onChange={event => setName(event.target.value)}
+            onChange={(event) => setName(event.target.value)}
           />
           <input
             type='email'
@@ -84,7 +84,7 @@ export const Registro: React.FC = () => {
             name='email'
             className='form-control mb-2'
             value={email}
-            onChange={event => setEmail(event.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
           />
           <input
             type='password'
@@ -92,7 +92,7 @@ export const Registro: React.FC = () => {
             name='password'
             className='form-control mb-2'
             value={password}
-            onChange={event => setPassword(event.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
           />
           <button type='submit' className='btn btn-primary'>
             únete
@@ -103,7 +103,7 @@ export const Registro: React.FC = () => {
       {message.length > 0 && (
         <div className='alert alert-danger mt-2'>
           <ul className='mb-0'>
-            {message.map(msg => (
+            {message.map((msg) => (
               <li key={msg}>{msg}</li>
             ))}
           </ul>
@@ -113,7 +113,7 @@ export const Registro: React.FC = () => {
       {errors.length > 0 && (
         <div className='alert alert-danger mt-2'>
           <ul className='mb-0'>
-            {errors.map(error => (
+            {errors.map((error) => (
               <li key={error}>{error}</li>
             ))}
           </ul>

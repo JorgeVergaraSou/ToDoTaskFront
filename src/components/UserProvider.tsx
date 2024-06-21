@@ -12,7 +12,7 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Function to handle login
   const handleLogin = (loggedInUser: User) => {
     setUser(loggedInUser)
-    console.log(loggedInUser)    
+    console.log(loggedInUser)
     localStorage.setItem('user', JSON.stringify(loggedInUser))
   }
 
@@ -39,4 +39,3 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 }
 
 export { UserContext, UserProvider }
-
