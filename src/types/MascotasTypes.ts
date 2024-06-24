@@ -22,3 +22,27 @@ export interface ProfileResponseType {
   createdAt: string
   updateAt: string
 }
+
+export interface BreedType {
+  idBreed: string
+  nameBreed: string
+  isActive: number
+  softDeleteDate: string
+}
+
+export interface PostType {
+  selectedTypePost: string
+  title: string
+  content: string
+}
+
+export interface PostResponseType {
+  message: string
+  idPost: number
+}
+
+export interface ResponseType {
+  status: number
+  message: string
+  ok: boolean
+}

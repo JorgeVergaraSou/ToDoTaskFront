@@ -35,6 +35,7 @@ export const Login: React.FC = () => {
     if (promiseLogin.status === 200) {
       const responseLogin: LoginResponseType = await promiseLogin.json()
       console.log(responseLogin)
+      localStorage.setItem('token', responseLogin.token)
 
       const promiseProfile = await fetch(
         `http://localhost:3006/api/v1/auth/profile`,
