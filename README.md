@@ -21,9 +21,9 @@ Para instalar las dependencias necesarias y ejecutar el proyecto localmente, sig
 
 2. Instala las dependencias: npm install
    
-3. Inicia el servidor de desarrollo: npm run dev
+3. Inicia el servidor de desarrollo: npm run start
 
-   Esto iniciará el servidor de desarrollo utilizando Vite, y podrás acceder al proyecto en `http://localhost:3000`.
+   Esto iniciará el servidor de desarrollo utilizando Vite, y podrás acceder al proyecto en `http://localhost:5173`.
 
 ## Dependencias
 
