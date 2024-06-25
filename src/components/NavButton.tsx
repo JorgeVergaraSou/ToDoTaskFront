@@ -6,12 +6,11 @@ interface NavButtonProps extends LinkProps {
   text?: string
 }
 
-export const NavButton: React.FC<NavButtonProps> = ({
-  text,
-  ...props
-}) => {
+export const NavButton: React.FC<NavButtonProps> = ({ text, ...props }) => {
   return (
-    <Link {...props} className={twMerge('nav-button no-underline', props.className)} >
+    <Link
+      {...props}
+      className={twMerge('nav-button no-underline', props.className)}>
       {text}
       {props.children}
     </Link>

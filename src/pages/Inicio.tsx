@@ -1,8 +1,7 @@
 //import { useEffect, useState } from 'react'
-import imgUrl from '../assets/logoRounded.png';
+import imgUrl from '../assets/logoRounded.png'
 
 export const Inicio: React.FC = () => {
-
   return (
     <>
       <div>
@@ -21,8 +20,8 @@ export const Inicio: React.FC = () => {
             <p>
               Estás en el lugar indicado si estás buscando a tu compañero peludo
               perdido o si querés ayudar a reunir a una mascota con su familia.
-              En Lost & Founds Pets!, estamos dedicados a conectar a
-              las mascotas perdidas con sus dueños amorosos. Nuestro objetivo es
+              En Lost & Founds Pets!, estamos dedicados a conectar a las
+              mascotas perdidas con sus dueños amorosos. Nuestro objetivo es
               proporcionar un espacio seguro y confiable donde puedas compartir
               información sobre mascotas perdidas y encontradas en tu comunidad.
             </p>
@@ -33,11 +32,10 @@ export const Inicio: React.FC = () => {
             ¿Perdiste a tu preciado amigo de cuatro patas?
           </h2>
           <p>
-            Publicá detalles sobre
-            tu mascota perdida, incluyendo una descripción, fotos y la ubicación
-            donde fue vista por última vez. Nuestra comunidad está lista para
-            ayudarte a difundir la información y reunirte con tu peludo amigo lo
-            antes posible.
+            Publicá detalles sobre tu mascota perdida, incluyendo una
+            descripción, fotos y la ubicación donde fue vista por última vez.
+            Nuestra comunidad está lista para ayudarte a difundir la información
+            y reunirte con tu peludo amigo lo antes posible.
           </p>
         </section>
         <section id='found-section' className='my-4'>
@@ -60,26 +58,10 @@ export const Inicio: React.FC = () => {
           </p>
         </section>
         <p>
-          En Lost & Founds Pets!, creemos que
-          cada mascota perdida tiene un camino de regreso a casa. ¡Súmate y
-          ayudemos a que eso suceda!
-        </p>
-        <p>
-          Sumate a nuestra comunidad de amantes de los animales y juntos
-          trabajaremos para garantizar que cada mascota reciba el amor y el
-          cuidado que merece. En Lost & Founds Pets!, creemos que
-          cada mascota perdida tiene un camino de regreso a casa. ¡Súmate y
-          ayudemos a que eso suceda!
-        </p>
-        <p>
-          Sumate a nuestra comunidad de amantes de los animales y juntos
-          trabajaremos para garantizar que cada mascota reciba el amor y el
-          cuidado que merece. En Lost & Founds Pets!, creemos que
-          cada mascota perdida tiene un camino de regreso a casa. ¡Súmate y
-          ayudemos a que eso suceda!
+          En Lost & Founds Pets!, creemos que cada mascota perdida tiene un
+          camino de regreso a casa. ¡Súmate y ayudemos a que eso suceda!
         </p>
       </div>
-
     </>
-  );
-};
+  )
+}

@@ -7,7 +7,6 @@ export const Perfil: React.FC = () => {
   const navigate = useNavigate()
   const { user, handleLogout } = useContext(UserContext)!
 
-
   useEffect(() => {
     !user ? navigate(routes.login.url) : ''
   }, [user, navigate])
@@ -29,8 +28,7 @@ export const Perfil: React.FC = () => {
           onClick={() => {
             handleLogout()
             navigate(routes.login.url)
-          }}
-        >
+          }}>
           Cerrar sesión
         </button>
       </div>

@@ -35,6 +35,7 @@ export const Login: React.FC = () => {
     if (promiseLogin.status === 200) {
       const responseLogin: LoginResponseType = await promiseLogin.json()
       console.log(responseLogin)
+      localStorage.setItem('token', responseLogin.token)
 
       const promiseProfile = await fetch(
         `http://localhost:3006/api/v1/auth/profile`,
@@ -88,7 +89,7 @@ export const Login: React.FC = () => {
                 className='form-control'
                 type='text'
                 placeholder='Email'
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className='mb-3'>
@@ -101,7 +102,7 @@ export const Login: React.FC = () => {
                 className='form-control'
                 type='password'
                 placeholder='Contraseña'
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             {error && <p>{error}</p>}
@@ -109,14 +110,13 @@ export const Login: React.FC = () => {
               Iniciar sesión
             </button>
             <button
-            className='btn btn-primary mx-1'
-            type='button'
-            onClick={() => {
-              navigate(routes.registration.url)
-            }}
-          >
-            Crear cuenta
-          </button>
+              className='btn btn-primary mx-1'
+              type='button'
+              onClick={() => {
+                navigate(routes.registration.url)
+              }}>
+              Crear cuenta
+            </button>
           </form>
         </div>
         {/* <div id='register'>
