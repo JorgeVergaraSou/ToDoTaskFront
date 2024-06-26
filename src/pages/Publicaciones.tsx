@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Post } from '../interfaces/post.interface'
 //import { Card } from '../components/components'
 
 export const Publicaciones: React.FC = () => {
