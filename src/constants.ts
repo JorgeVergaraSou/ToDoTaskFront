@@ -14,6 +14,9 @@ export const routes = {
   nuevamascota: {
     url: '/nuevamascota'
   },
+  nuevaraza: {
+    url: '/nuevaraza'
+  },
   nuevopost: {
     url: '/nuevopost'
   },

@@ -23,6 +23,15 @@ export interface ProfileResponseType {
   updateAt: string
 }
 
+export interface UserType {
+  idUser: number
+  name: string
+  email: string
+  role: string
+  iat: boolean
+  exp: number
+}
+
 export interface BreedType {
   idBreed: string
   nameBreed: string

@@ -4,6 +4,7 @@ import { Perfil } from '../pages/Perfil'
 import {
   Contacto,
   CrearMascota,
+  CrearRaza,
   Inicio,
   Login,
   Mascotas,
@@ -63,6 +64,15 @@ const LFRoutes: RoutesType[] = [
     ),
     path: routes.nuevamascota.url,
     key: routes.nuevamascota.url
+  },
+  {
+    element: (
+      <Layout>
+        <CrearRaza />
+      </Layout>
+    ),
+    path: routes.nuevaraza.url,
+    key: routes.nuevaraza.url
   },
   {
     element: (

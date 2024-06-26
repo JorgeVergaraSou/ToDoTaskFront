@@ -23,6 +23,14 @@ export const Perfil: React.FC = () => {
           {user?.name}
         </p>
         <button
+          className={`btn btn-primary mx-1${user?.role === 'admin' ? '' : ' hidden'}`}
+          type='button'
+          onClick={() => {
+            navigate(routes.nuevaraza.url)
+          }}>
+          Crear nueva raza
+        </button>
+        <button
           className='btn btn-primary mx-1'
           type='button'
           onClick={() => {

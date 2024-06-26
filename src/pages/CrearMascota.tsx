@@ -157,7 +157,6 @@ export const CrearMascota: React.FC = () => {
         setLoading(false)
       }
     }
-
     fetchBreeds()
   }, [])
 
