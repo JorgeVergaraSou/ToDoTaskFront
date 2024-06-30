@@ -1,10 +1,10 @@
 import { User } from '../interfaces/user.interface'
 
-// Define an interface for the context
 export interface UserContextType {
-  user: User | null
-  handleLogin: (loggedInUser: User) => void
-  handleLogout: () => void
+  user: User | null;
+  token: string | null;
+  handleLogin: (loggedInUser: User, userToken: string) => void;
+  handleLogout: () => void;
 }
 
 export interface LoginResponseType {

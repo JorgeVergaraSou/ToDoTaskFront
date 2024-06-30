@@ -1,144 +1,161 @@
-import React, { useState } from 'react'
-// import CrearMascota from './CrearMascota_old1'; // Asumiendo que CrearMascota está en el mismo directorio
-import Modal from 'react-modal'
+import React, { useState, useContext } from 'react';
+import Modal from 'react-modal';
+import { CrearMascota } from './CrearMascota';
+import { typePostEnum } from '../utils/title.enum';
+import { UserContext } from '../components/UserProvider'; // Importa el contexto de usuario
+import TypePostSelect from '../components/TypePostSelect';
 
 // Inicializar react-modal con el elemento raíz de la aplicación (si no se ha hecho ya en otro lugar)
-Modal.setAppElement('#root')
+Modal.setAppElement('#root');
 
 export const NuevoPost: React.FC = () => {
-  const [errors, setErrors] = useState<string[]>([])
-  const [message, setMessage] = useState<string[]>([])
-  const [title, setTitle] = useState<string>('')
-  const [content, setContent] = useState<string>('')
-  const [postType, setPostType] = useState<number>(0) // Estado para el valor del select
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false) // Estado para controlar el modal
-  const [postId, setPostId] = useState<number | null>(null) // Estado para guardar el ID del post creado
+    const { token } = useContext(UserContext)!; // Obtén el token del contexto de usuario
+    const [errors, setErrors] = useState<string[]>([]);
+    const [message, setMessage] = useState<string[]>([]);
+    const [title, setTitle] = useState<string>("");
+    const [content, setContent] = useState<string>("");
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false); // Estado para controlar el modal
+    const [idPost, setIdPost] = useState<number | null>(null); // Estado para guardar el ID del post creado
+    const [selectedTypePost, setSelectedTypePost] = useState<typePostEnum>(typePostEnum.SELECCION);
 
-  const validateForm = () => {
-    const newErrors: string[] = []
+    const handleTypePostChange = (typePost: typePostEnum) => {
+        setSelectedTypePost(typePost);
+    };
 
-    if (title.trim() === '') {
-      newErrors.push('El título no puede estar vacío')
-    }
+    const validateForm = () => {
+        const newErrors: string[] = [];
 
-    if (content.trim() === '') {
-      newErrors.push('El contenido no puede estar vacío')
-    }
+        if (title.trim() === "") {
+            newErrors.push("El título no puede estar vacío");
+        }
 
-    if (postType === 0) {
-      newErrors.push('Debe seleccionar un tipo de publicación')
-    }
+        if (content.trim() === "") {
+            newErrors.push("El contenido no puede estar vacío");
+        }
 
-    setErrors(newErrors)
-    return newErrors.length === 0
-  }
+        if (selectedTypePost === typePostEnum.SELECCION) {
+            newErrors.push("Debe seleccionar un tipo de publicación");
+        }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setErrors([])
+        setErrors(newErrors);
+        return newErrors.length === 0;
+    };
 
-    if (!validateForm()) {
-      return
-    }
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setErrors([]);
 
-    const responseNewPost = await fetch(
-      `http://localhost:3006/api/v1/posts/newPost`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          title,
-          content,
-          postType // Incluir el valor del select en el cuerpo de la solicitud
-        })
-      }
-    )
+        if (!validateForm()) {
+            return;
+        }
 
-    const responseAPI = await responseNewPost.json()
+        try {
+            const responseNewPost = await fetch(
+                `http://localhost:3006/api/v1/posts/newPost`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}` // Incluir el token en los headers de la solicitud
+                    },
+                    body: JSON.stringify({
+                        title,
+                        content,
+                        selectedTypePost,
+                    }),
+                }
+            );
 
-    if (!responseNewPost.ok) {
-      console.log(responseAPI.message)
-      if (typeof responseAPI.message === 'string') {
-        setMessage(responseAPI.message.split(','))
-      } else if (Array.isArray(responseAPI.message)) {
-        setMessage(responseAPI.message)
-      } else {
-        setMessage(Object.values(responseAPI.message))
-      }
-      return
-    }
+            const responseAPI = await responseNewPost.json();
 
-    setPostId(responseAPI.id) // Asumiendo que el ID del post creado está en responseAPI.id
-    setModalIsOpen(true) // Abrir el modal al crear el post
-  }
+            if (!responseNewPost.ok) {
+                console.log(responseAPI.message);
+                if (typeof responseAPI.message === 'string') {
+                    setMessage(responseAPI.message.split(","));
+                } else if (Array.isArray(responseAPI.message)) {
+                    setMessage(responseAPI.message);
+                } else {
+                    setMessage(Object.values(responseAPI.message));
+                }
+                return;
+            }
 
-  return (
-    <>
-      <h1>Crea tu publicación</h1>
-      <div className='centradito'>
-        <form onSubmit={handleSubmit}>
-          <span>Tipo de publicación</span>
-          <select
-            className='form-select'
-            value={postType} // Establecer el valor del select al estado
-            onChange={(event) => setPostType(Number(event.target.value))} // Actualizar el estado cuando se cambie el select
-          >
-            <option value={0}>SELECCIONE OPCIÓN</option>
-            <option value={1}>MASCOTA PERDIDA</option>
-            <option value={2}>OFREZCO MASCOTA EN ADOPCIÓN</option>
-            <option value={3}>QUIERO ADOPTAR</option>
-          </select>
-          <span>Título</span>
-          <input
-            type='text'
-            placeholder=''
-            name='title'
-            className='form-control mb-2'
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-          <textarea
-            placeholder='Contenido'
-            name='content'
-            className='form-control mb-2'
-            value={content}
-            onChange={(event) => setContent(event.target.value)}
-          />
-          <button type='submit' className='btn btn-primary'>
-            Nueva Publicación
-          </button>
-        </form>
-      </div>
+            setIdPost(responseAPI.idPost); // Asumiendo que el ID del post creado está en responseAPI.idPost
+            setModalIsOpen(true); // Abrir el modal al crear el post
 
-      {errors.length > 0 && (
-        <div className='alert alert-danger mt-2'>
-          <ul className='mb-0'>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+            // RESETEAR FORM AL ENVIAR
+            setTitle("");
+            setContent("");
+            setSelectedTypePost(typePostEnum.SELECCION);
+            setErrors([]);
+            setMessage([]);
+        } catch (error) {
+            console.error('Error al enviar la solicitud:', error);
+        }
+    };
 
-      {message.length > 0 && (
-        <div className='alert alert-danger mt-2'>
-          <ul className='mb-0'>
-            {message.map((msg) => (
-              <li key={msg}>{msg}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+    const handleModalClose = () => {
+        setModalIsOpen(false);
+    };
 
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        contentLabel='Crear Mascota'>
-        {/* <CrearMascota postId={postId} /> */}
-        <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
-      </Modal>
-    </>
-  )
-}
+    return (
+        <>
+            <h1>Crea tu publicación</h1>
+            <div className="centradito">
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="typePost">Tipo de Publicación</label><br></br>
+                    <TypePostSelect selectedTypePost={selectedTypePost} onChange={handleTypePostChange} />
+                    <br></br>
+                    <label htmlFor="Título">Título</label>
+                    <input
+                        type="text"
+                        placeholder=""
+                        name="title"
+                        className="form-control mb-2"
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)}
+                    />
+                    <textarea
+                        placeholder="Contenido"
+                        name="content"
+                        className="form-control mb-2"
+                        value={content}
+                        onChange={(event) => setContent(event.target.value)}
+                    />
+                    <button type="submit" className="btn btn-primary">
+                        Nueva Publicación
+                    </button>
+                </form>
+            </div>
+
+            {errors.length > 0 && (
+                <div className="alert alert-danger mt-2">
+                    <ul className="mb-0">
+                        {errors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {message.length > 0 && (
+                <div className="alert alert-danger mt-2">
+                    <ul className="mb-0">
+                        {message.map((msg) => (
+                            <li key={msg}>{msg}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={() => setModalIsOpen(false)}
+                contentLabel="Crear Mascota"
+            >
+                <CrearMascota idPost={idPost} setIdPost={setIdPost} onCloseModal={handleModalClose} />
+                <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
+            </Modal>
+        </>
+    );
+};

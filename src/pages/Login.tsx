@@ -1,25 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Button } from '../components/Button'
-import { Title } from '../components/Title'
-import { UserContext } from '../components/UserProvider'
-import { routes } from '../constants'
-import { User } from '../interfaces/user.interface'
-import { LoginResponseType, ProfileResponseType } from '../types/MascotasTypes'
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../components/Button';
+import { Title } from '../components/Title';
+import { UserContext } from '../components/UserProvider';
+import { routes } from '../constants';
+import { User } from '../interfaces/user.interface';
+import { LoginResponseType, ProfileResponseType } from '../types/MascotasTypes';
 
 export const Login: React.FC = () => {
-  const navigate = useNavigate()
-  const { user, handleLogin, handleLogout } = useContext(UserContext)!
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [users, setUsers] = useState([])
-  const [error, setError] = useState('')
-  const [errors, setErrors] = useState<string[]>([])
+  const navigate = useNavigate();
+  const { user, handleLogin, handleLogout } = useContext(UserContext)!;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setErrors([])
-    // const user = users.find(u => u.name === username && u.password === password)
+    event.preventDefault();
+    setError('');
 
     const promiseLogin = await fetch(
       `http://localhost:3006/api/v1/auth/login`,
@@ -33,11 +30,12 @@ export const Login: React.FC = () => {
           password
         })
       }
-    )
+    );
+
     if (promiseLogin.status === 200) {
-      const responseLogin: LoginResponseType = await promiseLogin.json()
-      console.log(responseLogin)
-      localStorage.setItem('token', responseLogin.token)
+      const responseLogin: LoginResponseType = await promiseLogin.json();
+      console.log(responseLogin);
+      localStorage.setItem('token', responseLogin.token);
 
       const promiseProfile = await fetch(
         `http://localhost:3006/api/v1/auth/profile`,
@@ -48,12 +46,12 @@ export const Login: React.FC = () => {
             Authorization: 'Bearer ' + responseLogin.token
           }
         }
-      )
-
-      const responseProfile: ProfileResponseType = await promiseProfile.json()
-      console.log(responseProfile)
+      );
 
       if (promiseProfile.status === 200) {
+        const responseProfile: ProfileResponseType = await promiseProfile.json();
+        console.log(responseProfile);
+
         const loggedUser: User = {
           email: responseProfile.email,
           role: responseProfile.role,
@@ -61,19 +59,25 @@ export const Login: React.FC = () => {
           iat: Boolean(responseProfile.isActive),
           name: responseProfile.name,
           exp: 0
-        }
-        handleLogin(loggedUser) // Pass the user object
-        setError('¡Inicio de sesión exitoso!')
-        navigate(routes.profile.url)
+        };
+
+        handleLogin(loggedUser, responseLogin.token); // Pasar el usuario y el token
+        
+        setError('¡Inicio de sesión exitoso!');
+        navigate(routes.profile.url);
+      } else {
+        setError('Error al obtener el perfil');
       }
     } else {
-      setError('Nombre de usuario o contraseña incorrectos')
+      setError('Nombre de usuario o contraseña incorrectos');
     }
-  }
+  };
 
   useEffect(() => {
-    user ? navigate(routes.profile.url) : ''
-  }, [user, navigate])
+    if (user) {
+      navigate(routes.profile.url);
+    }
+  }, [user, navigate]);
 
   return (
     <>
@@ -122,9 +126,9 @@ export const Login: React.FC = () => {
                 type='button'
                 className='w-full'
                 onClick={() => {
-                  console.log('click')
-                  console.log(routes.registration.url)
-                  navigate(routes.registration.url)
+                  console.log('click');
+                  console.log(routes.registration.url);
+                  navigate(routes.registration.url);
                 }}>
                 Crear cuenta
               </Button>
@@ -133,5 +137,5 @@ export const Login: React.FC = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

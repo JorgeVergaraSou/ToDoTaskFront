@@ -1,18 +1,27 @@
-import React, { useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { UserContext } from '../components/UserProvider'
-import { routes } from '../constants'
-import { Title } from '../components/Title'
-import { Button } from '../components/Button'
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../components/UserProvider';
+import { routes } from '../constants';
+import { Title } from '../components/Title';
+import { Button } from '../components/Button';
 
 export const Perfil: React.FC = () => {
-  const navigate = useNavigate()
-  const { user, handleLogout } = useContext(UserContext)!
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
 
   useEffect(() => {
-    console.log(user)
-    !user ? navigate(routes.login.url) : ''
-  }, [user, navigate])
+    console.log('Context:', context);
+    if (!context?.user) {
+      navigate(routes.login.url);
+    }
+  }, [context, navigate]);
+
+  if (!context) {
+    return <div>Loading...</div>;
+  }
+
+  const { user, token, handleLogout } = context;
+
   return (
     <>
       <div>
@@ -26,14 +35,18 @@ export const Perfil: React.FC = () => {
               {user?.role}
             </p>
             <p>
+              <span>token: </span>
+              {token}
+            </p>
+            <p>
               <span>Usuario: </span>
               {user?.name}
             </p>
             <Button
               type='button'
               onClick={() => {
-                handleLogout()
-                navigate(routes.login.url)
+                handleLogout();
+                navigate(routes.login.url);
               }}>
               Cerrar sesión
             </Button>
@@ -41,5 +54,5 @@ export const Perfil: React.FC = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
