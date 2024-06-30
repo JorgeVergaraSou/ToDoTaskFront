@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Button } from '../components/Button'
+import { Title } from '../components/Title'
 import { UserContext } from '../components/UserProvider'
 import { routes } from '../constants'
 import { User } from '../interfaces/user.interface'
@@ -76,61 +78,59 @@ export const Login: React.FC = () => {
   return (
     <>
       <div>
-        <div id='login'>
-          <h2 className='text-center'>Iniciar sesión</h2>
-          <form onSubmit={handleSubmit}>
+        <div className='flex justify-between text-center mb-6'>
+          <Title as='h2'>Iniciar sesión</Title>
+        </div>
+        <div id='login' className='flex justify-center'>
+          <form onSubmit={handleSubmit} className='font-sans space-y-4 w-80'>
             <div className='mb-3'>
-              <label htmlFor='email' className='form-label'>
-                Email
+              <label
+                htmlFor='email'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Correo electrónico
               </label>
               <input
                 name='email'
                 id='email'
-                className='form-control'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 type='text'
-                placeholder='Email'
+                placeholder='email@email.com'
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className='mb-3'>
-              <label htmlFor='password' className='form-label'>
+              <label
+                htmlFor='password'
+                className='block text-gray-700 text-md font-bold mb-2'>
                 Contraseña
               </label>
               <input
                 name='password'
                 id='password'
-                className='form-control'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 type='password'
-                placeholder='Contraseña'
+                placeholder='******'
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             {error && <p>{error}</p>}
-            <button type='submit' className='btn btn-primary'>
-              Iniciar sesión
-            </button>
-            <button
-              className='btn btn-primary mx-1'
-              type='button'
-              onClick={() => {
-                navigate(routes.registration.url)
-              }}>
-              Crear cuenta
-            </button>
+            <div className='flex flex-col'>
+              <Button type='submit' className='w-full'>
+                Iniciar sesión
+              </Button>
+              <Button
+                type='button'
+                className='w-full'
+                onClick={() => {
+                  console.log('click')
+                  console.log(routes.registration.url)
+                  navigate(routes.registration.url)
+                }}>
+                Crear cuenta
+              </Button>
+            </div>
           </form>
         </div>
-        {/* <div id='register'>
-          <h5 className='text-center'>¿Aun no estas registrado?</h5>
-          <button
-            className='btn btn-primary mx-1'
-            type='button'
-            onClick={() => {
-              navigate(routes.registration.url)
-            }}
-          >
-            Crear cuenta
-          </button>
-        </div> */}
       </div>
     </>
   )

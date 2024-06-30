@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../components/UserProvider'
 import { routes } from '../constants'
 import { Post } from '../interfaces/post.interface'
+import { Title } from '../components/Title'
 
 export const Mascotas: React.FC = () => {
   const navigate = useNavigate()
@@ -61,7 +62,7 @@ export const Mascotas: React.FC = () => {
   return (
     <>
       <div className='flex justify-between text-center mb-6'>
-        <h1 className='text-center text-2xl font-bold m-0'>Mascotas</h1>
+        <Title as='h2'>Mascotas</Title>
         <div className='flex gap-4'>
           <button
             className={`text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out`}

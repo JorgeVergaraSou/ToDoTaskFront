@@ -67,10 +67,9 @@ export const Inicio: React.FC = () => {
           <div className='md:w-1/3'></div>
         </section>
         <div>
-          <p>
-            En Lost & Founds Pets!, creemos que cada mascota perdida tiene un
-            camino de regreso a casa. ¡Súmate y ayudemos a que eso suceda!
-          </p>
+          <h2 className='font-caveat text-3xl font-semibold mb-2 text-center'>
+            {`¡Súmate y ayudemos a que eso suceda!`}
+          </h2>
         </div>
       </div>
     </>

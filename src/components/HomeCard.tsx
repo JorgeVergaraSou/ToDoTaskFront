@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Button } from './Button'
 
 interface HomeCardProps {
   title: string
@@ -15,6 +16,7 @@ export const HomeCard: React.FC<HomeCardProps> = ({
 }) => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false)
   const [hiddenTextHeight, setHiddenTextHeight] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
   const hiddenTextRef = useRef<HTMLParagraphElement>(null)
 
   const toggleTextVisibility = () => {
@@ -28,7 +30,10 @@ export const HomeCard: React.FC<HomeCardProps> = ({
   }, [])
 
   return (
-    <div className='flex flex-col bg-white shadow-md rounded-lg p-6 w-full mx-auto my-4'>
+    <div
+      className='flex flex-col bg-white shadow-md rounded-lg p-6 w-full mx-auto my-4'
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}>
       {imageUrl && <img src={imageUrl} alt={title} className='w-full mb-4' />}
       <h2 className='font-caveat text-5xl font-semibold mb-2 text-center'>
         {title}
@@ -51,11 +56,19 @@ export const HomeCard: React.FC<HomeCardProps> = ({
         }}>
         {hiddenText}
       </p>
-      <button
+      <Button
+        url={''}
         onClick={toggleTextVisibility}
-        className='mt-3 font-sans self-center text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'>
+        className={`${
+          isHovered || isFullTextVisible ? 'opacity-100' : 'opacity-0'
+        }`}>{`Ver ${isFullTextVisible ? 'menos' : ' más'}`}</Button>
+      {/* <button
+        onClick={toggleTextVisibility}
+        className={`mt-3 font-sans self-center text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out ${
+          isHovered || isFullTextVisible ? 'opacity-100' : 'opacity-0'
+        }`}>
         {`Ver ${isFullTextVisible ? 'menos' : ' más'}`}
-      </button>
+      </button> */}
     </div>
   )
 }

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Especies, TypePost } from '../constants'
+import { Especies, TypePost, routes } from '../constants'
 import { BreedType, PostResponseType } from '../types/MascotasTypes'
+import { Title } from '../components/Title'
+import { Button } from '../components/Button'
+import { useNavigate } from 'react-router-dom'
 
 export const CrearMascota: React.FC = () => {
+  const navigate = useNavigate()
   const [errors, setErrors] = useState<string[]>([])
   const [message, setMessage] = useState<string[]>([])
   //const [loading, setLoading] = useState(true);
@@ -116,6 +120,7 @@ export const CrearMascota: React.FC = () => {
     } else {
       const dataCreatedPet = responsePetAPI.data
       console.log(dataCreatedPet)
+      navigate(routes.pets.url)
       // levantar modal
       // en modal cambiar estado de variable
     }
@@ -162,160 +167,207 @@ export const CrearMascota: React.FC = () => {
 
   return (
     <>
-      {cargaPublicacion && (
-        <form onSubmit={handleSubmitPublicacion}>
-          <div>
-            <h1>Datos de Publicacion</h1>
-          </div>
-
-          <div className='mb-3'>
-            <label htmlFor='post-type'>Tipo de publicacion</label>
-            <select
-              className='form-select'
-              onChange={(event) => setSelectedTypePost(event.target.value)}
-              name='post-type'>
-              <option value={0} defaultChecked>
-                SELECCIONE OPCIÓN
-              </option>
-              {TypePost.map((type) => (
-                <option key={type} value={type}>
-                  {type}
+      <div className='flex justify-between text-center mb-6'>
+        <Title as='h2'>{`${
+          cargaPublicacion ? 'Datos de Publicacion' : 'Datos de mascota'
+        }`}</Title>
+      </div>
+      <div className='flex justify-center'>
+        {cargaPublicacion && (
+          <form
+            onSubmit={handleSubmitPublicacion}
+            className='font-sans space-y-4 w-80'>
+            <div className='mb-3'>
+              <label
+                htmlFor='post-type'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Tipo de publicacion
+              </label>
+              <select
+                className='form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                onChange={(event) => setSelectedTypePost(event.target.value)}
+                name='post-type'>
+                <option value={0} defaultChecked>
+                  Seleccione...
                 </option>
-              ))}
-            </select>
-          </div>
+                {TypePost.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className='mb-3'>
-            <label htmlFor='post-title'>Titulo</label>
-            <input
-              type='text'
-              placeholder='Nombre'
-              name='post-title'
-              className='form-control'
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-            />
-          </div>
+            <div className='mb-3'>
+              <label
+                htmlFor='post-title'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Titulo
+              </label>
+              <input
+                type='text'
+                placeholder='Lorem ipsum...'
+                name='post-title'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+              />
+            </div>
 
-          <div className='mb-3'>
-            <label htmlFor='post-content'>Contenido</label>
-            <textarea
-              placeholder='Contenido...'
-              name='post-content'
-              className='form-control'
-              value={content}
-              onChange={(event) => setContent(event.target.value)}
-            />
-          </div>
+            <div className='mb-3'>
+              <label
+                htmlFor='post-content'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Contenido
+              </label>
+              <textarea
+                placeholder='Lorem ipsum...'
+                name='post-content'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                value={content}
+                onChange={(event) => setContent(event.target.value)}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <Button type='submit' className='w-full'>
+                Enviar
+              </Button>
+            </div>
+          </form>
+        )}
+        {!cargaPublicacion && (
+          <form
+            onSubmit={handleSubmitMascota}
+            className='font-sans space-y-4 w-80'>
+            <div className='mb-3'>
+              <label
+                htmlFor='pet-name'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Nombre
+              </label>
+              <input
+                type='text'
+                placeholder='Nombre'
+                name='pet-name'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                value={namePet}
+                onChange={(event) => setnamePet(event.target.value)}
+              />
+            </div>
 
-          <button type='submit' className='btn btn-primary'>
-            Enviar
-          </button>
-        </form>
-      )}
-      {!cargaPublicacion && (
-        <form onSubmit={handleSubmitMascota}>
-          <div>
-            <h1>Datos de mascota</h1>
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='pet-name'>Nombre</label>
-            <input
-              type='text'
-              placeholder='Nombre'
-              name='pet-name'
-              className='form-control'
-              value={namePet}
-              onChange={(event) => setnamePet(event.target.value)}
-            />
-          </div>
-
-          <div className='mb-3'>
-            <label htmlFor='pet-specie'>Especie</label>
-            <select
-              className='form-select'
-              onChange={(event) => setPets(event.target.value)}
-              name='pet-specie'>
-              <option value={0} defaultChecked>
-                SELECCIONE OPCIÓN
-              </option>
-              {Especies.map((especie) => (
-                <option key={especie} value={especie}>
-                  {especie}
+            <div className='mb-3'>
+              <label
+                htmlFor='pet-specie'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Especie
+              </label>
+              <select
+                className='form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                onChange={(event) => setPets(event.target.value)}
+                name='pet-specie'>
+                <option value={0} defaultChecked>
+                  Seleccione...
                 </option>
-              ))}
-            </select>
-          </div>
+                {Especies.map((especie) => (
+                  <option key={especie} value={especie}>
+                    {especie}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className='mb-3'>
-            <label htmlFor='pet-type'>Raza</label>
-            <select
-              className='form-select'
-              onChange={(event) => setBreed(event.target.value)}
-              name='pet-type'>
-              <option value={0} defaultChecked>
-                SELECCIONE OPCIÓN
-              </option>
-              {breeds.map((breed) => (
-                <option key={breed.nameBreed} value={breed.nameBreed}>
-                  {breed.nameBreed}
+            <div className='mb-3'>
+              <label
+                htmlFor='pet-type'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Raza
+              </label>
+              <select
+                className='form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                onChange={(event) => setBreed(event.target.value)}
+                name='pet-type'>
+                <option value={0} defaultChecked>
+                  Seleccione...
                 </option>
+                {breeds.map((breed) => (
+                  <option key={breed.nameBreed} value={breed.nameBreed}>
+                    {breed.nameBreed}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className='mb-3'>
+              <label
+                htmlFor='pet-age'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Edad
+              </label>
+              <input
+                type='number'
+                placeholder='5'
+                name='pet-age'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                value={age}
+                onChange={(event) => setAge(event.target.value)}
+              />
+            </div>
+
+            <div className='mb-3'>
+              <label
+                htmlFor='pet-description'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Descripcion
+              </label>
+              <textarea
+                placeholder='Lorem ipsum...'
+                name='pet-description'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+              />
+            </div>
+
+            <div className='mb-3'>
+              <label
+                htmlFor='pet-image'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Imagen
+              </label>
+              <input
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                name='pet-image'
+                type='file'
+                id='formFile'
+              />
+            </div>
+            <div className='flex flex-col'>
+              <Button type='submit' className='w-full'>
+                Enviar
+              </Button>
+            </div>
+          </form>
+        )}
+        {message.length > 0 && (
+          <div className='alert alert-danger mt-2'>
+            <ul className='mb-0'>
+              {message.map((msg) => (
+                <li key={msg}>{msg}</li>
               ))}
-            </select>
+            </ul>
           </div>
+        )}
 
-          <div className='mb-3'>
-            <label htmlFor='pet-type'>Edad</label>
-            <input
-              type='number'
-              placeholder='5'
-              name='pet-age'
-              className='form-control'
-              value={age}
-              onChange={(event) => setAge(event.target.value)}
-            />
+        {errors.length > 0 && (
+          <div className='alert alert-danger mt-2'>
+            <ul className='mb-0'>
+              {errors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
           </div>
-
-          <div className='mb-3'>
-            <label htmlFor='pet-description'>Descripcion</label>
-            <textarea
-              placeholder='Descripcion...'
-              name='pet-description'
-              className='form-control'
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-            />
-          </div>
-
-          <div className='mb-3'>
-            <label htmlFor='formFile'>Default file input example</label>
-            <input className='form-control' type='file' id='formFile' />
-          </div>
-
-          <button type='submit' className='btn btn-primary'>
-            Enviar
-          </button>
-        </form>
-      )}
-      {message.length > 0 && (
-        <div className='alert alert-danger mt-2'>
-          <ul className='mb-0'>
-            {message.map((msg) => (
-              <li key={msg}>{msg}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {errors.length > 0 && (
-        <div className='alert alert-danger mt-2'>
-          <ul className='mb-0'>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+        )}
+      </div>
     </>
   )
 }

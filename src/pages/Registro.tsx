@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Title } from '../components/Title'
+import { Button } from '../components/Button'
 
 export const Registro: React.FC = () => {
   // const { status } = useSession();
@@ -67,58 +69,85 @@ export const Registro: React.FC = () => {
 
   return (
     <>
-      <h1>Registrarse</h1>
-      <div className='centradito'>
-        <form onSubmit={handleSubmit}>
-          <input
-            type='text'
-            placeholder='test'
-            name='name'
-            className='form-control mb-2'
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-          <input
-            type='email'
-            placeholder='test@test.com'
-            name='email'
-            className='form-control mb-2'
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-          <input
-            type='password'
-            placeholder='123123'
-            name='password'
-            className='form-control mb-2'
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-          <button type='submit' className='btn btn-primary'>
-            únete
-          </button>
-        </form>
+      <div>
+        <div className='flex justify-between text-center mb-6'>
+          <Title as='h2'>Crear cuenta</Title>
+        </div>
+        <div className='flex justify-center'>
+          <form onSubmit={handleSubmit} className='font-sans space-y-4 w-80'>
+            <div>
+              <label
+                htmlFor='name'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Nombre
+              </label>
+              <input
+                type='text'
+                placeholder='John Doe'
+                name='name'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor='email'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Correo electrónico
+              </label>
+              <input
+                type='email'
+                placeholder='email@email.com'
+                name='email'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor='password'
+                className='block text-gray-700 text-md font-bold mb-2'>
+                Contraseña
+              </label>
+              <input
+                type='password'
+                placeholder='******'
+                name='password'
+                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <Button type='submit' className='w-full'>
+                Crear
+              </Button>
+            </div>
+          </form>
+        </div>
+
+        {message.length > 0 && (
+          <div className='alert alert-danger mt-2'>
+            <ul className='mb-0'>
+              {message.map((msg) => (
+                <li key={msg}>{msg}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {errors.length > 0 && (
+          <div className='alert alert-danger mt-2'>
+            <ul className='mb-0'>
+              {errors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-
-      {message.length > 0 && (
-        <div className='alert alert-danger mt-2'>
-          <ul className='mb-0'>
-            {message.map((msg) => (
-              <li key={msg}>{msg}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {errors.length > 0 && (
-        <div className='alert alert-danger mt-2'>
-          <ul className='mb-0'>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </>
   )
 }

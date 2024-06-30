@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Title } from '../components/Title'
+import { Button } from '../components/Button'
 
 interface ContactForm {
   name: string
@@ -30,14 +32,16 @@ export const Contacto: React.FC = () => {
 
   return (
     <>
-      <div>
-        <h1 className='text-2xl font-bold mb-4'>Contacto</h1>
-        <form onSubmit={handleSubmit} className='space-y-4'>
-          <div>
+      <div className='flex justify-between text-center mb-6'>
+        <Title as='h2'>Contacto</Title>
+      </div>
+      <div className='flex justify-center'>
+        <form onSubmit={handleSubmit} className='font-sans space-y-4 w-80'>
+          <div className='mb-3'>
             <label
               htmlFor='name'
-              className='block text-gray-700 text-sm font-bold mb-2'>
-              Nombre:
+              className='block text-gray-700 text-md font-bold mb-2'>
+              Nombre
             </label>
             <input
               type='text'
@@ -46,14 +50,15 @@ export const Contacto: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              placeholder='John Doe'
+              className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
-          <div>
+          <div className='mb-3'>
             <label
               htmlFor='email'
-              className='block text-gray-700 text-sm font-bold mb-2'>
-              Correo electrónico:
+              className='block text-gray-700 text-md font-bold mb-2'>
+              Correo electrónico
             </label>
             <input
               type='email'
@@ -62,14 +67,15 @@ export const Contacto: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              placeholder='email@email.com'
+              className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
-          <div>
+          <div className='mb-3'>
             <label
               htmlFor='message'
-              className='block text-gray-700 text-sm font-bold mb-2'>
-              Mensaje:
+              className='block text-gray-700 text-md font-bold mb-2'>
+              Mensaje
             </label>
             <textarea
               id='message'
@@ -77,14 +83,15 @@ export const Contacto: React.FC = () => {
               value={formData.message}
               onChange={handleChange}
               required
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              placeholder='Lorem ipsum...'
+              className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
-          <button
-            type='submit'
-            className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
-            Enviar
-          </button>
+          <div className='flex flex-col'>
+            <Button type='submit' className='w-full'>
+              Enviar
+            </Button>
+          </div>
         </form>
       </div>
     </>

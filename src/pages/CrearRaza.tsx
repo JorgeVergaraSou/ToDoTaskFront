@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '../constants'
 import { BreedType, PostResponseType, UserType } from '../types/MascotasTypes'
+import { Title } from '../components/Title'
+import { Button } from '../components/Button'
 
 export const CrearRaza: React.FC = () => {
+  const navigate = useNavigate()
   const [errors, setErrors] = useState<string[]>([])
   const [message, setMessage] = useState<string[]>([])
   //const [loading, setLoading] = useState(true);
@@ -53,6 +58,7 @@ export const CrearRaza: React.FC = () => {
       //   return
       // }
       console.log(responseBreedAPI)
+      navigate(routes.pets.url)
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error)
     }
@@ -96,46 +102,52 @@ export const CrearRaza: React.FC = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmitBreed}>
-        <div>
-          <h1>Crear raza</h1>
-        </div>
+      <div className='flex justify-between text-center mb-6'>
+        <Title as='h2'>Agregar raza</Title>
+      </div>
+      <div className='flex justify-center'>
+        <form onSubmit={handleSubmitBreed} className='font-sans space-y-4 w-80'>
+          <div className='mb-3'>
+            <label
+              htmlFor='breed-title'
+              className='block text-gray-700 text-md font-bold mb-2'>
+              Nombre
+            </label>
+            <input
+              type='text'
+              placeholder='Nombre de la raza'
+              name='breed-title'
+              className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              value={breedName}
+              onChange={(event) => setBreedName(event.target.value)}
+            />
+          </div>
+          <div className='flex flex-col'>
+            <Button type='submit' className='w-full'>
+              Enviar
+            </Button>
+          </div>
+        </form>
+        {message.length > 0 && (
+          <div className='alert alert-danger mt-2'>
+            <ul className='mb-0'>
+              {message.map((msg) => (
+                <li key={msg}>{msg}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-        <div className='mb-3'>
-          <label htmlFor='breed-title'>Nombre</label>
-          <input
-            type='text'
-            placeholder='Nombre'
-            name='breed-title'
-            className='form-control'
-            value={breedName}
-            onChange={(event) => setBreedName(event.target.value)}
-          />
-        </div>
-
-        <button type='submit' className='btn btn-primary'>
-          Enviar
-        </button>
-      </form>
-      {message.length > 0 && (
-        <div className='alert alert-danger mt-2'>
-          <ul className='mb-0'>
-            {message.map((msg) => (
-              <li key={msg}>{msg}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {errors.length > 0 && (
-        <div className='alert alert-danger mt-2'>
-          <ul className='mb-0'>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+        {errors.length > 0 && (
+          <div className='alert alert-danger mt-2'>
+            <ul className='mb-0'>
+              {errors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </>
   )
 }

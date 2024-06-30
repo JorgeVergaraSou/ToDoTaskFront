@@ -10,7 +10,7 @@ export const NavButton: React.FC<NavButtonProps> = ({ text, ...props }) => {
   return (
     <Link
       {...props}
-      className={twMerge('nav-button no-underline', props.className)}>
+      className={twMerge('nav-button font-sans no-underline', props.className)}>
       {text}
       {props.children}
     </Link>
