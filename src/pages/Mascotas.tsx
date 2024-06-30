@@ -26,6 +26,8 @@ export const Mascotas: React.FC = () => {
         }
         const dataPost = await responsePost.json();
         setPosts(dataPost);
+        console.log(dataPost);
+        
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -94,14 +96,14 @@ export const Mascotas: React.FC = () => {
           <p className='card-text mb-4'>{post.content}</p>
         </div>
         <div className='flex justify-center'>
-          <button
-            className='text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'
-            type='button'
-            onClick={() => {
-              navigate('#');
-            }}>
-            Ver publicación
-          </button>
+        <button
+                    className='text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'
+                    type='button'
+                    onClick={() => {
+                      navigate(routes.verPublicacion.url(post.idPost));
+                    }}>
+                    Ver publicación
+                  </button>
         </div>
       </div>
     </div>

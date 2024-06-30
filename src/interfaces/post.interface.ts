@@ -1,7 +1,7 @@
 import { Pet } from './pet.interface'
 
 export interface Post {
-  idPost: number
+  idPost: string
   typePost: string
   title: string
   content: string

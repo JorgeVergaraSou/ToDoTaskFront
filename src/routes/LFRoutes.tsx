@@ -8,6 +8,7 @@ import {
   Inicio,
   Login,
   Mascotas,
+  Publicacion,
   Nosotros,
   NuevoPost,
   Registro
@@ -82,6 +83,15 @@ const LFRoutes: RoutesType[] = [
     ),
     path: routes.nuevopost.url,
     key: routes.nuevopost.url
+  },
+  {
+    element: (
+      <Layout>
+        <Publicacion />
+      </Layout>
+    ),
+    path: routes.verPublicacion.url(':idPost'),
+    key: routes.verPublicacion.url(':idPost')
   },
   {
     element: (

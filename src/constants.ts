@@ -31,9 +31,12 @@ export const routes = {
   },
   profile: {
     url: '/perfil'
+  },
+  verPublicacion: {
+    url: (id?: string) => (id ? `/verpublicacion/${id}` : '/verpublicacion/:idPost')
   }
 }
-
+/*
 export const Especies = ['Gato', 'Perro', 'Ave', 'Reptil']
 
 export const TypePost = [
@@ -41,4 +44,4 @@ export const TypePost = [
   'Ofrezco mascota en adopcion',
   'Quiero adoptar mascota',
   'Encontré mascota perdida'
-]
+]*/
