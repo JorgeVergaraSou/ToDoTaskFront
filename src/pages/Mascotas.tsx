@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../components/UserProvider'
 import { routes } from '../constants'
 import { Post } from '../interfaces/post.interface'
 
@@ -9,6 +10,7 @@ export const Mascotas: React.FC = () => {
   //const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const { user } = useContext(UserContext)!
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -43,6 +45,11 @@ export const Mascotas: React.FC = () => {
     console.log(posts)
   }, [posts])
 
+  useEffect(() => {
+    console.log(user)
+    console.log(user?.role === 'admin')
+  }, [user])
+
   if (loading) {
     return <p>Loading...</p>
   }
@@ -53,35 +60,62 @@ export const Mascotas: React.FC = () => {
 
   return (
     <>
-      <div>
-        <h1 className='text-2xl font-bold mb-4'>Mascotas</h1>
-        <button
-          className='btn btn-primary mx-1'
-          type='button'
-          onClick={() => {
-            navigate(routes.nuevamascota.url)
-          }}>
-          Agregar post de mascota
-        </button>
+      <div className='flex justify-between text-center mb-6'>
+        <h1 className='text-center text-2xl font-bold m-0'>Mascotas</h1>
+        <div className='flex gap-4'>
+          <button
+            className={`text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out`}
+            type='button'
+            onClick={() => {
+              navigate(routes.nuevamascota.url)
+            }}>
+            Agregar mascota
+          </button>
+          <button
+            className={`${
+              user?.role === 'admin' ? '' : ' hidden'
+            } text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out`}
+            type='button'
+            onClick={() => {
+              navigate(routes.nuevaraza.url)
+            }}>
+            Agregar raza
+          </button>
+        </div>
       </div>
-      <div className='centradito'>
+      <div className='grid gap-x-2 gap-y-4 grid-cols-3'>
         {posts &&
           posts.map((post) => (
-            <div className='card' key={post.idPost} style={{ width: '18rem' }}>
+            <div
+              className='border-cuaternary-grade2 border-2 p-3 rounded-lg flex flex-col justify-between h-full'
+              key={post.idPost}
+              id={`post-${post.idPost}`}>
               {post.pets[0] && post.pets[0].image !== undefined && (
                 <img
                   src={`/img/${post.pets[0].image}`}
                   width={150}
                   height={150}
                   alt='Imagen de la mascota'
+                  className='mb-4'
                 />
               )}
-              <div className='card-body'>
-                <h5 className='card-title'>{post.title}</h5>
-                <p className='card-text'>{post.content}</p>
-                <a href='#' className='btn btn-primary'>
-                  Ver publicación
-                </a>
+              <div className='flex flex-col justify-between flex-grow'>
+                <div className='mt-auto'>
+                  <div>
+                    <h5 className='card-title font-bold mb-1'>{post.title}</h5>
+                    <p className='card-text mb-4'>{post.content}</p>
+                  </div>
+                  <div className='flex justify-center'>
+                    <button
+                      className='text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'
+                      type='button'
+                      onClick={() => {
+                        navigate('#')
+                      }}>
+                      Ver publicación
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

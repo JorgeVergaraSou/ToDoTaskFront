@@ -34,8 +34,8 @@ export const NavBar: React.FC = () => {
   // }, [user])
 
   return (
-    <div className='text-white bg-black'>
-      <div className='flex justify-between items-center h-16 max-w-[1240px] mx-auto px-4'>
+    <div className='text-white bg-two-dogs bg-two-dogs-mobile bg-cover md:bg-two-dogs-desk md:bg-auto'>
+      <div className='flex justify-between items-center h-28 max-w-[1240px] mx-auto px-4'>
         {/* Logo */}
         <div>
           <NavButton to={routes.home.url}>
@@ -54,10 +54,10 @@ export const NavBar: React.FC = () => {
               <NavButton
                 to={user && item.logedInUrl ? item.logedInUrl : item.url}
                 // text={user && item.logedInText ? item.logedInText : item.text}
-                className='items-center mx-3 my-5 px-2 py-2 cursor-pointer text-primary-grade3 group transition duration-300'>
+                className='items-center mx-3 my-5 px-2 py-2 cursor-pointer text-secondary-grade3 group transition duration-300'>
                 <>
                   {user && item.logedInText ? item.logedInText : item.text}
-                  <span className='block max-w-0 group-hover:max-w-full group-active:max-w-full transition-all duration-500 h-0.5 bg-primary-grade3'></span>
+                  <span className='block max-w-0 group-hover:max-w-full group-active:max-w-full transition-all duration-500 h-0.5 bg-secondary-grade3'></span>
                 </>
               </NavButton>
             </li>
@@ -69,9 +69,9 @@ export const NavBar: React.FC = () => {
           onClick={handleNav}
           className='block md:hidden cursor-pointer z-50'>
           {nav ? (
-            <AiOutlineClose size={24} className='text-black' />
+            <AiOutlineClose size={24} className='text-secondary-grade3' />
           ) : (
-            <AiOutlineMenu size={24} className='text-black' />
+            <AiOutlineMenu size={24} className='text-secondary-grade3' />
           )}
         </div>
 

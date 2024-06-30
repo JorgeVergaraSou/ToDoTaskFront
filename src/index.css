@@ -1,8 +1,11 @@
+@import url('<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">');
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
   @font-face {
     font-family: 'Nunito';
     font-style: normal;
@@ -10,7 +13,8 @@
     font-display: swap;
     src: url('/fonts/Nunito.woff2') format('woff2');
   }
-}
+} */
+
 /* HTML: <div class="loader"></div> */
 body,
 html {
@@ -46,11 +50,8 @@ html {
   width: 30px;
   height: 25px;
   --c: no-repeat radial-gradient(farthest-side, currentColor 92%, #0000);
-  background:
-    var(--c) left / 70% 70%,
-    var(--c) right/20% 20%,
-    var(--c) top 0 right 15%/20% 20%,
-    var(--c) bottom 0 right 15%/20% 20%;
+  background: var(--c) left / 70% 70%, var(--c) right/20% 20%,
+    var(--c) top 0 right 15%/20% 20%, var(--c) bottom 0 right 15%/20% 20%;
 }
 @keyframes l12 {
   100% {

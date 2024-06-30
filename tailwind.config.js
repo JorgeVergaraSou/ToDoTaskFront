@@ -2,9 +2,25 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif'],
+      caveat: ['"Caveat Brush"', 'cursive']
+    },
     extend: {
-      fontFamily: {
-        sans: ['Nunito', 'sans-serif']
+      // Flex
+      flexBasis: {
+        '33': '33.3333%',
+      },
+      backgroundImage: {
+        'two-dogs': "url('/public/img/Dos-perros.png')",
+        'four-pets': "url('/img/Cuatro-mascotas.png')",
+      },
+      backgroundPosition: {
+        'two-dogs-mobile': '50% 50%',
+        'two-dogs-desk': '30% 45%',
+      },
+      backgroundSize: {
+        '40%': '40%'
       },
       colors: {
         primary: {
@@ -37,14 +53,21 @@ export default {
         }
       },
       animation: {
-        'underline-slide': 'underlineSlide 0.5s ease-out',
+        'underline-slide': 'underlineSlide 0.5s ease-out'
       },
       keyframes: {
         underlineSlide: {
           '0%': { textDecorationLine: 'none' },
-          '50%': { textDecorationLine: 'underline', textDecorationStart: 'center' },
-          '100%': { textDecorationLine: 'underline', textDecorationStart: '0%', textDecorationEnd: '100%' },
-        },
+          '50%': {
+            textDecorationLine: 'underline',
+            textDecorationStart: 'center'
+          },
+          '100%': {
+            textDecorationLine: 'underline',
+            textDecorationStart: '0%',
+            textDecorationEnd: '100%'
+          }
+        }
       }
     }
   },
