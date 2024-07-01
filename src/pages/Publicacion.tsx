@@ -23,7 +23,7 @@ export const Publicacion: React.FC = () => {
         const dataPost = await responsePost.json();
         setPost(dataPost);
         console.log(dataPost);
-        
+
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -52,28 +52,50 @@ export const Publicacion: React.FC = () => {
 
   return (
     <>
-      <div>
-        <h1 className='text-2xl font-bold mb-4'>{post.title}</h1>
-        <div className='centradito'>
+      <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">{post.title}</h1>
+        <div className="space-y-4">
+          <div className="flex flex-col space-y-2">
+            <div className="flex justify-between items-center">
+              <label className="block text-gray-700 text-md font-bold">Nombre:</label>
+              <span className="text-xl font-medium">{post.pets[0].namePet}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <label className="block text-gray-700 text-md font-bold">Edad:</label>
+              <span className="text-xl font-medium">{post.pets[0].age}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <label className="block text-gray-700 text-md font-bold">Soy un:</label>
+              <span className="text-xl font-medium">{post.pets[0].pet}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <label className="block text-gray-700 text-md font-bold">Descripción:</label>
+              <span className="text-xl font-medium">{post.pets[0].description}</span>
+            </div>
+          </div>
           {post.pets && post.pets.length > 0 && post.pets[0].image ? (
-            <img
-              src={`http://localhost:3006/uploads/${post.pets[0].image}`}
-              
-              width={150}
-              height={150}
-              alt='Imagen de la mascota'
-            />
+            <div className="text-center">
+              <img
+                src={`http://localhost:3006/uploads/${post.pets[0].image}`}
+                width={550}
+                height={550}
+                alt="Imagen de la mascota"
+                className="rounded-lg mx-auto"
+              />
+            </div>
           ) : (
             post.pets && post.pets.length > 0 && !post.pets[0].image && (
-              <p>Sin foto disponible</p>
+              <p className="text-gray-500 text-center">Sin foto disponible</p>
             )
           )}
-          <div className='card-body'>
-            <h5 className='card-title'>{post.title}</h5>
-            <p className='card-text'>{post.content}</p>
-          </div>
+          <div className="flex justify-between items-center">
+              <label className="block text-gray-700 text-md font-bold">Publicado</label>
+              <span className="text-xl font-medium">{new Date(post.pets[0].createdAt).toLocaleDateString()}</span>
+            </div>
         </div>
       </div>
     </>
   );
+  
+  
 };

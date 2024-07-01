@@ -9,7 +9,7 @@ export const Registro: React.FC = () => {
   const [message, setMessage] = useState<string[]>([]);
   const [name, setName] = useState<string>('test');
   const [email, setEmail] = useState<string>('test@test.com');
-  const [password, setPassword] = useState<string>('123123');
+  const [password, setPassword] = useState<string>('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -87,7 +87,7 @@ export const Registro: React.FC = () => {
               </label>
               <input
                 type='password'
-                placeholder='******'
+                placeholder=''
                 name='password'
                 className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 value={password}
