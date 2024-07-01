@@ -2,33 +2,67 @@ import React, { useState } from 'react'
 import { Title } from '../components/Title'
 import { Button } from '../components/Button'
 
-interface ContactForm {
-  name: string
-  email: string
-  message: string
-}
-
 export const Contacto: React.FC = () => {
-  const [formData, setFormData] = useState<ContactForm>({
-    name: '',
-    email: '',
-    message: ''
-  })
+  const [errors, setErrors] = useState<string[]>([])
+  const [message, setMessage] = useState<string[]>([])
+  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [messageSend, setMessageSend] = useState<string>('')
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    event.preventDefault()
+    setErrors([])
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault()
-    // Aquí puedes enviar el formData a tu API o realizar otras operaciones
-    console.log(formData)
-  }
+    const responseContact = await fetch(
+      `http://localhost:3006/api/v1/contact`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          messageSend,
+
+        })
+      }
+    )
+
+    const responseAPI = await responseContact.json()
+    console.log(responseAPI);
+    
+
+    if (!responseContact.ok) {
+      // Verificar si responseAPI.message es un string
+    
+      if (typeof responseAPI.message === 'string') {
+        setMessage(responseAPI.message.split(','))
+      } else if (Array.isArray(responseAPI.message)) {
+        // Si responseAPI.message es un array, asumimos que ya contiene mensajes separados
+        setMessage(responseAPI.message)
+      } else {
+        // Si responseAPI.message es un objeto, tratamos de obtener sus valores
+        setMessage(Object.values(responseAPI.message))
+      }
+      return
+    }else {
+      if (typeof responseAPI.message === 'string') {
+        setMessage(responseAPI.message.split(','))
+      } else if (Array.isArray(responseAPI.message)) {
+        // Si responseAPI.message es un array, asumimos que ya contiene mensajes separados
+        setMessage(responseAPI.message)
+      } else {
+        // Si responseAPI.message es un objeto, tratamos de obtener sus valores
+        setMessage(Object.values(responseAPI.message))
+      }
+      alert(responseAPI.message);
+      setName('');
+      setEmail('');
+      setMessageSend('');
+    }
+
+  };
 
   return (
     <>
@@ -45,10 +79,10 @@ export const Contacto: React.FC = () => {
             </label>
             <input
               type='text'
-              id='name'
+             
               name='name'
-              value={formData.name}
-              onChange={handleChange}
+              value={name}
+              onChange={(event) => setName(event.target.value)}
               required
               placeholder='John Doe'
               className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -62,10 +96,10 @@ export const Contacto: React.FC = () => {
             </label>
             <input
               type='email'
-              id='email'
+              
               name='email'
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               required
               placeholder='email@email.com'
               className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -78,10 +112,10 @@ export const Contacto: React.FC = () => {
               Mensaje
             </label>
             <textarea
-              id='message'
+              
               name='message'
-              value={formData.message}
-              onChange={handleChange}
+              value={messageSend}
+              onChange={(event) => setMessageSend(event.target.value)}
               required
               placeholder='Lorem ipsum...'
               className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'

@@ -1,71 +1,51 @@
-import React, { useState } from 'react'
-import { Title } from '../components/Title'
-import { Button } from '../components/Button'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Title } from '../components/Title';
+import { Button } from '../components/Button';
 
 export const Registro: React.FC = () => {
-  // const { status } = useSession();
-  const [errors, setErrors] = useState<string[]>([])
-  const [message, setMessage] = useState<string[]>([])
-  const [name, setName] = useState<string>('test')
-  const [email, setEmail] = useState<string>('test@test.com')
-  const [password, setPassword] = useState<string>('123123')
-  // const router = useRouter();
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState<string[]>([]);
+  const [message, setMessage] = useState<string[]>([]);
+  const [name, setName] = useState<string>('test');
+  const [email, setEmail] = useState<string>('test@test.com');
+  const [password, setPassword] = useState<string>('123123');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setErrors([])
+    event.preventDefault();
+    setErrors([]);
+    setMessage([]);
 
-    const responseRegister = await fetch(
-      `http://localhost:3006/api/v1/auth/register`,
-      // `${process.env.REACT_APP_BACKEND_URL}/auth/register`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password
-        })
-      }
-    )
+    const responseRegister = await fetch(`http://localhost:3006/api/v1/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password
+      })
+    });
 
-    const responseAPI = await responseRegister.json()
+    const responseAPI = await responseRegister.json();
 
     if (!responseRegister.ok) {
-      // Verificar si responseAPI.message es un string
-      console.log(responseAPI.message)
       if (typeof responseAPI.message === 'string') {
-        setMessage(responseAPI.message.split(','))
+        setMessage([responseAPI.message]);
       } else if (Array.isArray(responseAPI.message)) {
-        // Si responseAPI.message es un array, asumimos que ya contiene mensajes separados
-        setMessage(responseAPI.message)
-      } else {
-        // Si responseAPI.message es un objeto, tratamos de obtener sus valores
-        setMessage(Object.values(responseAPI.message))
+        setMessage(responseAPI.message);
+      } else if (responseAPI.message && typeof responseAPI.message === 'object') {
+        setMessage(Object.values(responseAPI.message));
       }
-      return
+    } else {
+      // Registro exitoso
+      setMessage(['Registro exitoso. Serás redirigido al inicio de sesión.']);
+      setTimeout(() => {
+        navigate('/login'); // Redirigir a la página de inicio de sesión después de 2 segundos
+      }, 2000);
     }
-    /*
-     const responseNextAuth = await signIn("credentials", {
-       email,
-       password,
-       redirect: false,
-     });
- 
-     if (responseNextAuth?.error) {
-       setErrors(responseNextAuth.error.split(","));
-       return;
-     }
- 
-     if (status === "loading") {
-       return <div className="loader-container"><div className="loader"></div> <div className="loader2"></div></div>;
-     }
- 
-     router.push("/dashboard");
-     */
-  }
+  };
 
   return (
     <>
@@ -76,9 +56,7 @@ export const Registro: React.FC = () => {
         <div className='flex justify-center'>
           <form onSubmit={handleSubmit} className='font-sans space-y-4 w-80'>
             <div>
-              <label
-                htmlFor='name'
-                className='block text-gray-700 text-md font-bold mb-2'>
+              <label htmlFor='name' className='block text-gray-700 text-md font-bold mb-2'>
                 Nombre
               </label>
               <input
@@ -91,9 +69,7 @@ export const Registro: React.FC = () => {
               />
             </div>
             <div>
-              <label
-                htmlFor='email'
-                className='block text-gray-700 text-md font-bold mb-2'>
+              <label htmlFor='email' className='block text-gray-700 text-md font-bold mb-2'>
                 Correo electrónico
               </label>
               <input
@@ -106,9 +82,7 @@ export const Registro: React.FC = () => {
               />
             </div>
             <div>
-              <label
-                htmlFor='password'
-                className='block text-gray-700 text-md font-bold mb-2'>
+              <label htmlFor='password' className='block text-gray-700 text-md font-bold mb-2'>
                 Contraseña
               </label>
               <input
@@ -129,10 +103,10 @@ export const Registro: React.FC = () => {
         </div>
 
         {message.length > 0 && (
-          <div className='alert alert-danger mt-2'>
+          <div className='alert alert-success mt-2'>
             <ul className='mb-0'>
-              {message.map((msg) => (
-                <li key={msg}>{msg}</li>
+              {message.map((msg, index) => (
+                <li key={index}>{msg}</li>
               ))}
             </ul>
           </div>
@@ -141,13 +115,13 @@ export const Registro: React.FC = () => {
         {errors.length > 0 && (
           <div className='alert alert-danger mt-2'>
             <ul className='mb-0'>
-              {errors.map((error) => (
-                <li key={error}>{error}</li>
+              {errors.map((error, index) => (
+                <li key={index}>{error}</li>
               ))}
             </ul>
           </div>
         )}
       </div>
     </>
-  )
-}
+  );
+};

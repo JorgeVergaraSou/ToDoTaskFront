@@ -34,7 +34,7 @@ export const Login: React.FC = () => {
 
     if (promiseLogin.status === 200) {
       const responseLogin: LoginResponseType = await promiseLogin.json();
-      console.log(responseLogin);
+     
       localStorage.setItem('token', responseLogin.token);
 
       const promiseProfile = await fetch(
@@ -50,8 +50,7 @@ export const Login: React.FC = () => {
 
       if (promiseProfile.status === 200) {
         const responseProfile: ProfileResponseType = await promiseProfile.json();
-        console.log(responseProfile);
-
+ 
         const loggedUser: User = {
           email: responseProfile.email,
           role: responseProfile.role,

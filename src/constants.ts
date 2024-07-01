@@ -34,6 +34,9 @@ export const routes = {
   },
   verPublicacion: {
     url: (id?: string) => (id ? `/verpublicacion/${id}` : '/verpublicacion/:idPost')
+  },
+  leermensaje: {
+    url: '/leermensaje'
   }
 }
 /*

@@ -16,6 +16,8 @@ export const Perfil: React.FC = () => {
     }
   }, [context, navigate]);
 
+
+
   if (!context) {
     return <div>Loading...</div>;
   }
@@ -26,22 +28,28 @@ export const Perfil: React.FC = () => {
     <>
       <div>
         <div className='flex justify-between text-center mb-6'>
-          <Title as='h2'>Bienvenido {user?.email}</Title>
+          <Title as='h3'>Bienvenido {user?.role}: {user?.name} </Title>
         </div>
+        {user?.role === 'admin' && ( // Verifica si el usuario tiene el rol de administrador
+            <><button
+            className='text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'
+            type='button'
+            onClick={() => {
+              navigate(routes.nuevaraza.url);
+            } }>
+            Agregar raza
+          </button>   <button
+            className='text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'
+            type='button'
+            onClick={() => {
+              navigate(routes.leermensaje.url);
+            } }>
+              Leer Mensajes
+            </button></>
+          )}
         <div className='flex flex-col justify-center '>
           <div className='font-sans space-y-4 w-80 m-auto'>
-            <p>
-              <span>Rol: </span>
-              {user?.role}
-            </p>
-            <p>
-              <span>token: </span>
-              {token}
-            </p>
-            <p>
-              <span>Usuario: </span>
-              {user?.name}
-            </p>
+
             <Button
               type='button'
               onClick={() => {

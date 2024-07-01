@@ -11,7 +11,8 @@ import {
   Publicacion,
   Nosotros,
   NuevoPost,
-  Registro
+  Registro,
+  LeerMensajes
 } from '../pages/pages'
 
 export interface RoutesType {
@@ -128,6 +129,15 @@ const LFRoutes: RoutesType[] = [
     ),
     path: routes.profile.url,
     key: routes.profile.url
+  },
+  {
+    element: (
+      <Layout>
+        <LeerMensajes />
+      </Layout>
+    ),
+    path: routes.leermensaje.url,
+    key: routes.leermensaje.url
   }
 ]
 
