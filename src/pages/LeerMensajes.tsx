@@ -68,6 +68,7 @@ export const LeerMensajes: React.FC = () => {
                     <p><strong>Nombre:</strong> {contact.name}</p>
                     <p><strong>Email:</strong> {contact.email}</p>
                     <p><strong>Mensaje:</strong> {contact.messageSend}</p>
+                    
                   </div>
                 ))}
               </div>
