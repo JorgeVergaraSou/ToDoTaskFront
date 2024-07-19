@@ -23,7 +23,7 @@ export const Perfil: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const responsePost = await fetch(`http://localhost:3006/api/v1/posts`, {
+        const responsePost = await fetch(`http://localhost:3006/api/v1/posts/postByUser`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
