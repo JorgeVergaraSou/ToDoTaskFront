@@ -80,16 +80,20 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <div>
-        <div className='flex justify-between text-center mb-6'>
-          <Title as='h2'>Iniciar sesión</Title>
-        </div>
-        <div id='login' className='flex justify-center'>
-          <form onSubmit={handleSubmit} className='font-sans space-y-4 w-80'>
+    <div className="container mx-auto px-4">
+      <div className='flex justify-center text-center mb-6'>
+        <Title as='h2' className="text-blue-600">Iniciar sesión</Title>
+      </div>
+      <div className='flex justify-center mb-6'>
+        {error && <p className="text-red-500">{error}</p>}
+      </div>
+      <div id='login' className='flex justify-center'>
+        <form onSubmit={handleSubmit} className='font-sans space-y-4 w-full max-w-lg'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
             <div className='mb-3'>
               <label
                 htmlFor='email'
-                className='block text-gray-700 text-md font-bold mb-2'>
+                className='block text-blue-600 text-md font-bold mb-2'>
                 Correo electrónico
               </label>
               <input
@@ -104,7 +108,7 @@ export const Login: React.FC = () => {
             <div className='mb-3'>
               <label
                 htmlFor='password'
-                className='block text-gray-700 text-md font-bold mb-2'>
+                className='block text-blue-600 text-md font-bold mb-2'>
                 Contraseña
               </label>
               <input
@@ -116,14 +120,13 @@ export const Login: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            {error && <p>{error}</p>}
-            <div className='flex flex-col'>
-              <Button type='submit' className='w-full'>
+            <div className='flex flex-col justify-center'>
+              <Button type='submit' className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
                 Iniciar sesión
               </Button>
               <Button
                 type='button'
-                className='w-full'
+                className='w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mt-2'
                 onClick={() => {
                   console.log('click');
                   console.log(routes.registration.url);
@@ -132,9 +135,11 @@ export const Login: React.FC = () => {
                 Crear cuenta
               </Button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
+  </>
+  
   );
 };

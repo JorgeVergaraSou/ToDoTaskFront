@@ -100,36 +100,45 @@ export const NuevoPost: React.FC = () => {
 
     return (
         <>
-            <h1>Crea tu publicación</h1>
-            <div className="centradito">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="typePost">Tipo de Publicación</label><br></br>
-                    <TypePostSelect selectedTypePost={selectedTypePost} onChange={handleTypePostChange} />
-                    <br></br>
-                    <label htmlFor="Título">Título</label>
-                    <input
-                        type="text"
-                        placeholder=""
-                        name="title"
-                        className="form-control mb-2"
-                        value={title}
-                        onChange={(event) => setTitle(event.target.value)}
-                    />
-                    <textarea
-                        placeholder="Contenido"
-                        name="content"
-                        className="form-control mb-2"
-                        value={content}
-                        onChange={(event) => setContent(event.target.value)}
-                    />
-                    <button type="submit" className="btn btn-primary">
-                        Nueva Publicación
-                    </button>
+            <h1 className="text-3xl font-bold text-blue-600 mb-4">Crea tu publicación</h1>
+            <div className="centradito bg-white p-6 rounded-lg shadow-lg">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label htmlFor="typePost" className="block text-sm font-medium text-orange-600">Tipo de Publicación</label>
+                        <div className="mt-1 w-full border border-gray-300 rounded-lg p-2">
+                            <TypePostSelect selectedTypePost={selectedTypePost} onChange={handleTypePostChange} />
+                        </div>
+                    </div>
+                    <div>
+                        <label htmlFor="Título" className="block text-sm font-medium text-orange-600">Título</label>
+                        <input
+                            type="text"
+                            placeholder=""
+                            name="title"
+                            className="form-control mb-2 w-full border border-gray-300 rounded-lg p-2"
+                            value={title}
+                            onChange={(event) => setTitle(event.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <textarea
+                            placeholder="Contenido"
+                            name="content"
+                            className="form-control mb-2 w-full border border-gray-300 rounded-lg p-2"
+                            value={content}
+                            onChange={(event) => setContent(event.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <button type="submit" className="btn btn-primary bg-orange-600 text-white font-bold py-2 px-4 rounded-lg">
+                            Nueva Publicación
+                        </button>
+                    </div>
                 </form>
             </div>
 
             {errors.length > 0 && (
-                <div className="alert alert-danger mt-2">
+                <div className="alert alert-danger mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                     <ul className="mb-0">
                         {errors.map((error) => (
                             <li key={error}>{error}</li>
@@ -139,7 +148,7 @@ export const NuevoPost: React.FC = () => {
             )}
 
             {message.length > 0 && (
-                <div className="alert alert-danger mt-2">
+                <div className="alert alert-success mt-2 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
                     <ul className="mb-0">
                         {message.map((msg) => (
                             <li key={msg}>{msg}</li>
@@ -152,10 +161,16 @@ export const NuevoPost: React.FC = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
                 contentLabel="Crear Mascota"
+                className="fixed inset-0 flex items-center justify-center p-4"
+                overlayClassName="fixed inset-0 bg-gray-500 bg-opacity-75"
             >
                 <CrearMascota idPost={idPost} setIdPost={setIdPost} onCloseModal={handleModalClose} />
-                <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
+                <button onClick={() => setModalIsOpen(false)} className="mt-4 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar</button>
             </Modal>
+
+
+
+
         </>
     );
 };

@@ -102,9 +102,12 @@ export const CrearRaza: React.FC = () => {
 
   return (
     <>
-      <div className='flex justify-between text-center mb-6'>
+          <div className='flex-col justify-between text-center mb-6'>
         <Title as='h2'>Agregar raza</Title>
       </div>
+    <div className='flex'>
+
+      <div className='flex justify-center'>1</div>
       <div className='flex justify-center'>
         <form onSubmit={handleSubmitBreed} className='font-sans space-y-4 w-80'>
           <div className='mb-3'>
@@ -128,7 +131,10 @@ export const CrearRaza: React.FC = () => {
             </Button>
           </div>
         </form>
-        {message.length > 0 && (
+        
+      </div>
+      <div className='flex justify-center'>
+      {message.length > 0 && (
           <div className='alert alert-danger mt-2'>
             <ul className='mb-0'>
               {message.map((msg) => (
@@ -147,6 +153,7 @@ export const CrearRaza: React.FC = () => {
             </ul>
           </div>
         )}
+      </div>
       </div>
     </>
   )

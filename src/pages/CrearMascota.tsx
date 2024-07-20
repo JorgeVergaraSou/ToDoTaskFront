@@ -128,70 +128,87 @@ export const CrearMascota: React.FC<CrearMascotaProps> = ({ idPost, onCloseModal
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nombre mascota"
-          name="namePets"
-          className="form-control mb-2"
-          value={namePets}
-          onChange={(event) => setNamePets(event.target.value)}
-        />
+     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg space-y-4">
+  <div>
+    <input
+      type="text"
+      placeholder="Nombre mascota"
+      name="namePets"
+      className="form-control mb-2 w-full border border-gray-300 rounded-lg p-2"
+      value={namePets}
+      onChange={(event) => setNamePets(event.target.value)}
+    />
+  </div>
 
-        <label htmlFor="typePost">Tipo de Mascota</label><br></br>
-        <TypePetSelect selectedPet={selectedPet} onChange={handleTypePetChange} />
+  <div>
+    <label htmlFor="typePost" className="block text-sm font-medium text-orange-600">Tipo de Mascota</label>
+    <div className="mt-1 w-full border border-gray-300 rounded-lg p-2">
+      <TypePetSelect selectedPet={selectedPet} onChange={handleTypePetChange} />
+    </div>
+  </div>
 
-        <br />
-        <SelectBreeds selectedBreed={selectedBreed} setSelectedBreed={setSelectedBreed} />
-        <br />
-        <input
-          type="number"
-          placeholder="Edad"
-          name="age"
-          className="form-control mb-2"
-          value={age}
-          onChange={(event) => setAge(event.target.value)}
-        />
-        <textarea
-          placeholder="Contenido"
-          name="content"
-          className="form-control mb-2"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-        />
+  <div>
+    <div className="mt-1 w-full border border-gray-300 rounded-lg p-2">
+      <SelectBreeds selectedBreed={selectedBreed} setSelectedBreed={setSelectedBreed} />
+    </div>
+  </div>
 
-        <div className="mb-3">
-          <label htmlFor="formFile">Foto</label>
-          <input className="form-control" type="file" onChange={(event) => setImage(event.target.files?.[0] || null)} />
-        </div>
+  <div>
+    <input
+      type="number"
+      placeholder="Edad"
+      name="age"
+      className="form-control mb-2 w-full border border-gray-300 rounded-lg p-2"
+      value={age}
+      onChange={(event) => setAge(event.target.value)}
+    />
+  </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-        >
-          Crear Mascota
-        </button>
-      </form>
+  <div>
+    <textarea
+      placeholder="Contenido"
+      name="content"
+      className="form-control mb-2 w-full border border-gray-300 rounded-lg p-2"
+      value={description}
+      onChange={(event) => setDescription(event.target.value)}
+    />
+  </div>
 
-      {message.length > 0 && (
-        <div className="alert alert-danger mt-2">
-          <ul className="mb-0">
-            {message.map((msg) => (
-              <li key={msg}>{msg}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+  <div className="mb-3">
+    <label htmlFor="formFile" className="block text-sm font-medium text-orange-600">Foto</label>
+    <input className="form-control w-full border border-gray-300 rounded-lg p-2" type="file" onChange={(event) => setImage(event.target.files?.[0] || null)} />
+  </div>
 
-      {errors.length > 0 && (
-        <div className="alert alert-danger mt-2">
-          <ul className="mb-0">
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+  <div>
+    <button
+      type="submit"
+      className="btn btn-primary bg-orange-600 text-white font-bold py-2 px-4 rounded-lg"
+    >
+      Crear Mascota
+    </button>
+  </div>
+</form>
+
+{message.length > 0 && (
+  <div className="alert alert-success mt-2 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+    <ul className="mb-0">
+      {message.map((msg) => (
+        <li key={msg}>{msg}</li>
+      ))}
+    </ul>
+  </div>
+)}
+
+{errors.length > 0 && (
+  <div className="alert alert-danger mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <ul className="mb-0">
+      {errors.map((error) => (
+        <li key={error}>{error}</li>
+      ))}
+    </ul>
+  </div>
+)}
+
     </>
   );
 };

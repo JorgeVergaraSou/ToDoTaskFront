@@ -48,80 +48,83 @@ export const Registro: React.FC = () => {
   };
 
   return (
-    <>
-      <div>
-        <div className='flex justify-between text-center mb-6'>
-          <Title as='h2'>Crear cuenta</Title>
-        </div>
-        <div className='flex justify-center'>
-          <form onSubmit={handleSubmit} className='font-sans space-y-4 w-80'>
-            <div>
-              <label htmlFor='name' className='block text-gray-700 text-md font-bold mb-2'>
-                Nombre
-              </label>
-              <input
-                type='text'
-                placeholder='John Doe'
-                name='name'
-                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor='email' className='block text-gray-700 text-md font-bold mb-2'>
-                Correo electrónico
-              </label>
-              <input
-                type='email'
-                placeholder='email@email.com'
-                name='email'
-                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor='password' className='block text-gray-700 text-md font-bold mb-2'>
-                Contraseña
-              </label>
-              <input
-                type='password'
-                placeholder=''
-                name='password'
-                className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </div>
-            <div className='flex flex-col'>
-              <Button type='submit' className='w-full'>
-                Crear
-              </Button>
-            </div>
-          </form>
-        </div>
-
-        {message.length > 0 && (
-          <div className='alert alert-success mt-2'>
-            <ul className='mb-0'>
-              {message.map((msg, index) => (
-                <li key={index}>{msg}</li>
-              ))}
-            </ul>
+<>
+  <div className="container mx-auto px-4">
+    <div className='flex justify-center text-center mb-6'>
+      <Title as='h2' className="text-blue-600">Crear cuenta</Title>
+    </div>
+    <div className='flex justify-center'>
+      <form onSubmit={handleSubmit} className='font-sans space-y-4 w-full max-w-lg'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+          <div className='mb-3'>
+            <label htmlFor='name' className='block text-blue-600 text-md font-bold mb-2'>
+              Nombre
+            </label>
+            <input
+              type='text'
+              placeholder='John Doe'
+              name='name'
+              className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+            />
           </div>
-        )}
-
-        {errors.length > 0 && (
-          <div className='alert alert-danger mt-2'>
-            <ul className='mb-0'>
-              {errors.map((error, index) => (
-                <li key={index}>{error}</li>
-              ))}
-            </ul>
+          <div className='mb-3'>
+            <label htmlFor='email' className='block text-blue-600 text-md font-bold mb-2'>
+              Correo electrónico
+            </label>
+            <input
+              type='email'
+              placeholder='email@email.com'
+              name='email'
+              className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
           </div>
-        )}
+          <div className='mb-3'>
+            <label htmlFor='password' className='block text-blue-600 text-md font-bold mb-2'>
+              Contraseña
+            </label>
+            <input
+              type='password'
+              placeholder='******'
+              name='password'
+              className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+        </div>
+        <div className='flex flex-col'>
+          <Button type='submit' className='w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded'>
+            Crear
+          </Button>
+        </div>
+      </form>
+    </div>
+
+    {message.length > 0 && (
+      <div className='alert alert-danger mt-2'>
+        <ul className='mb-0'>
+          {message.map((msg, index) => (
+            <li key={index}>{msg}</li>
+          ))}
+        </ul>
       </div>
-    </>
+    )}
+
+    {errors.length > 0 && (
+      <div className='alert alert-danger mt-2'>
+        <ul className='mb-0'>
+          {errors.map((error, index) => (
+            <li key={index}>{error}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</>
+
   );
 };
