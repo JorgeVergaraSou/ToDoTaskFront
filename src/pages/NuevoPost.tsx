@@ -4,6 +4,7 @@ import { CrearMascota } from './CrearMascota';
 import { typePostEnum } from '../utils/title.enum';
 import { UserContext } from '../components/UserProvider'; // Importa el contexto de usuario
 import TypePostSelect from '../components/TypePostSelect';
+import { Title } from '../components/Title';
 
 // Inicializar react-modal con el elemento raíz de la aplicación (si no se ha hecho ya en otro lugar)
 Modal.setAppElement('#root');
@@ -100,8 +101,32 @@ export const NuevoPost: React.FC = () => {
 
     return (
         <>
-            <h1 className="text-3xl font-bold text-blue-600 mb-4">Crea tu publicación</h1>
-            <div className="centradito bg-white p-6 rounded-lg shadow-lg">
+        <div className="container mx-auto px-4">
+        <div className='flex justify-center text-center mb-6'>
+        <Title as='h2' className="text-blue-600">Crea tu publicación</Title>
+      </div>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            <div className='mb-4'>            {errors.length > 0 && (
+                <div className="alert alert-danger mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <ul className="mb-0">
+                        {errors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {message.length > 0 && (
+                <div className="alert alert-success mt-2 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <ul className="mb-0">
+                        {message.map((msg) => (
+                            <li key={msg}>{msg}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}</div>
+           
+            <div className='mb-4'>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label htmlFor="typePost" className="block text-sm font-medium text-orange-600">Tipo de Publicación</label>
@@ -136,26 +161,10 @@ export const NuevoPost: React.FC = () => {
                     </div>
                 </form>
             </div>
+            <div className='mb-4'></div>
+</div>
 
-            {errors.length > 0 && (
-                <div className="alert alert-danger mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <ul className="mb-0">
-                        {errors.map((error) => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
 
-            {message.length > 0 && (
-                <div className="alert alert-success mt-2 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                    <ul className="mb-0">
-                        {message.map((msg) => (
-                            <li key={msg}>{msg}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
 
             <Modal
                 isOpen={modalIsOpen}
@@ -169,7 +178,7 @@ export const NuevoPost: React.FC = () => {
             </Modal>
 
 
-
+            </div>
 
         </>
     );

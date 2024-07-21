@@ -96,16 +96,7 @@ export const Mascotas: React.FC = () => {
                     Ver publicación
                   </button>
         </div>
-        <div className='flex justify-center'>
-        <button
-                    className='text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'
-                    type='button'
-                    onClick={() => {
-                      navigate(routes.verPublicacion.url(post.idPost));
-                    }}>
-                    Borrar Publicación
-                  </button>
-        </div>
+
       </div>
     </div>
   </div>

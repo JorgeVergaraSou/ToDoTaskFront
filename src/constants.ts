@@ -37,14 +37,8 @@ export const routes = {
   },
   leermensaje: {
     url: '/leermensaje'
+  },
+  postpropios: {
+    url: '/postpropios'
   }
 }
-/*
-export const Especies = ['Gato', 'Perro', 'Ave', 'Reptil']
-
-export const TypePost = [
-  'Busco mascota perdida',
-  'Ofrezco mascota en adopcion',
-  'Quiero adoptar mascota',
-  'Encontré mascota perdida'
-]*/

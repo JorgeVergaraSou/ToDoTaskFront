@@ -12,7 +12,8 @@ import {
   Nosotros,
   NuevoPost,
   Registro,
-  LeerMensajes
+  LeerMensajes,
+  PostPropios
 } from '../pages/pages'
 
 export interface RoutesType {
@@ -138,6 +139,15 @@ const LFRoutes: RoutesType[] = [
     ),
     path: routes.leermensaje.url,
     key: routes.leermensaje.url
+  },
+  {
+    element: (
+      <Layout>
+        <PostPropios />
+      </Layout>
+    ),
+    path: routes.postpropios.url,
+    key: routes.postpropios.url
   }
 ]
 
