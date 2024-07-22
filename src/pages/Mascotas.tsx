@@ -54,19 +54,7 @@ export const Mascotas: React.FC = () => {
     <>
       <div className='flex justify-between text-center mb-6'>
         <Title as='h2'>Mascotas</Title>
-        <div className='flex gap-4'>
-          {user && ( // Verifica si el usuario está autenticado
-            <button
-              className='text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'
-              type='button'
-              onClick={() => {
-                navigate(routes.nuevopost.url);
-              }}>
-              Agregar mascota
-            </button>
-          )}
 
-        </div>
       </div>
       <div className='grid gap-x-2 gap-y-4 grid-cols-3'>
       {posts && posts.map((post) => (

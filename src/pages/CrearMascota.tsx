@@ -3,14 +3,9 @@ import { UserContext } from '../components/UserProvider';
 import TypePetSelect from '../components/PetSelected';
 import { PetEnum } from '../utils/pets.enum';
 import { SelectBreeds } from '../components/Breeds';
+import { PostProps } from '../interfaces/post.interface';
 
-interface CrearMascotaProps {
-  idPost: number | null;
-  setIdPost: (id: number | null) => void;
-  onCloseModal: () => void;
-}
-
-export const CrearMascota: React.FC<CrearMascotaProps> = ({ idPost, onCloseModal }) => {
+export const CrearMascota: React.FC<PostProps> = ({ idPost, onCloseModal }) => {
   const { token } = useContext(UserContext)!;
   const [errors, setErrors] = useState<string[]>([]);
   const [message, setMessage] = useState<string[]>([]);
@@ -24,55 +19,7 @@ export const CrearMascota: React.FC<CrearMascotaProps> = ({ idPost, onCloseModal
   };
 
   const [selectedBreed, setSelectedBreed] = useState<string>('');
-/*
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    setErrors([]);
 
-    const formData = new FormData();
-    formData.append('namePet', namePets);
-    formData.append('pet', selectedPet);
-    formData.append('age', age);
-    formData.append('description', description);
-    formData.append('breed', selectedBreed);
-
-    if (image) {
-      formData.append('image', image);
-    }
-    if (idPost !== null) {
-      formData.append('idPost', idPost.toString());
-    }
-
-    const responseNewPet = await fetch(
-      `http://localhost:3006/api/v1/pets/newPet`,
-      {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: formData,
-      }
-    );
-
-    const responseAPI = await responseNewPet.json();
-
-    if (!responseNewPet.ok) {
-
-      if (typeof responseAPI.message === 'string') {
-        setMessage(responseAPI.message.split(','));
-      } else if (Array.isArray(responseAPI.message)) {
-        setMessage(responseAPI.message);
-      } else {
-        setMessage(Object.values(responseAPI.message));
-      }
-      return;
-    }
-    else {
-      alert(responseAPI.message)
-      onCloseModal();
-    }
-  };*/
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrors([]);

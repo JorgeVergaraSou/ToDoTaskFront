@@ -11,3 +11,9 @@ export interface Post {
   userIdFk: number
   pets: Pet[]
 }
+
+export interface PostProps {
+  idPost: number | null;
+  setIdPost: (id: number | null) => void;
+  onCloseModal: () => void;
+}
