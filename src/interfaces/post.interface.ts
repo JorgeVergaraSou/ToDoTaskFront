@@ -13,7 +13,6 @@ export interface Post {
 }
 
 export interface PostProps {
-  idPost: number | null;
-  setIdPost: (id: number | null) => void;
-  onCloseModal: () => void;
+  idPost: string | null;
+  setErrorMsg: React.Dispatch<React.SetStateAction<string | null>>;
 }

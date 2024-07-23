@@ -89,9 +89,10 @@ export const Login: React.FC = () => {
       </div>
       <div id='login' className='flex justify-center'>
         <form onSubmit={handleSubmit} className='font-sans space-y-4 w-full max-w-lg'>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-            <div className='mb-3'>
-              <label
+          <div className='grid grid-cols-1 md:grid-cols-1 gap-4 justify-center'>
+
+            <div className='m-auto'>
+            <label
                 htmlFor='email'
                 className='block text-blue-600 text-md font-bold mb-2'>
                 Correo electrónico
@@ -104,8 +105,6 @@ export const Login: React.FC = () => {
                 placeholder='email@email.com'
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
-            <div className='mb-3'>
               <label
                 htmlFor='password'
                 className='block text-blue-600 text-md font-bold mb-2'>
@@ -119,9 +118,7 @@ export const Login: React.FC = () => {
                 placeholder='******'
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-            <div className='flex flex-col justify-center'>
-              <Button type='submit' className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+                            <Button type='submit' className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
                 Iniciar sesión
               </Button>
               <Button
@@ -135,6 +132,7 @@ export const Login: React.FC = () => {
                 Crear cuenta
               </Button>
             </div>
+
           </div>
         </form>
       </div>
