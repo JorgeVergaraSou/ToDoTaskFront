@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Post } from '../interfaces/post.interface';
+import { Post, PostProps } from '../interfaces/post.interface';
 import { UserContext } from '../components/UserProvider';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../constants';
 import { Title } from '../components/Title';
-
+import { DeletePost } from '../components/DeletePost';
 
 export const PostPropios: React.FC = () => {
     const navigate = useNavigate();
@@ -15,6 +15,12 @@ export const PostPropios: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const { user, token, handleLogout } = context!;
 
+    const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+    const [message, setMessage] = useState<string | null>(null); // Estado para manejar el mensaje
+
+    const handleDeletePost = (idPost: string) => {
+        setSelectedPostId(idPost);
+    };
 
     useEffect(() => {
         console.log('Context:', context);
@@ -68,9 +74,10 @@ export const PostPropios: React.FC = () => {
 
     return (
         <>
-                <div className='flex justify-center text-center mb-6'>
-        <Title as='h2' className="text-blue-600">Tus Publicaciones</Title>
-      </div>
+            <div className='flex justify-center text-center mb-6'>
+                <Title as='h2' className="text-blue-600">Tus Publicaciones</Title>
+            </div>
+            {message && <div className="alert">{message}</div>} {/* Mostrar el mensaje */}
             <div className='grid gap-x-2 gap-y-4 grid-cols-3'>
                 {posts && posts.map((post) => (
                     <div className='border-cuaternary-grade2 border-2 p-3 rounded-lg flex flex-col justify-between h-full' key={post.idPost} id={`post-${post.idPost}`}>
@@ -103,19 +110,17 @@ export const PostPropios: React.FC = () => {
                                         className='text-center border-tertiary-grade2 border-2 text-tertiary-grade2 hover:bg-tertiary-grade2 hover:text-secondary-grade3 font-semibold rounded-3xl p-2 transition-all duration-500 ease-in-out'
                                         type='button'
                                         onClick={() => {
-                                            navigate(routes.verPublicacion.url(post.idPost));
+                                            handleDeletePost(post.idPost);
                                         }}>
                                         Borrar Publicación
                                     </button>
+                                    {selectedPostId && <DeletePost idPost={selectedPostId} setMessage={setMessage} />} {/* Pasa setMessage */}
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
-
             </div>
         </>
     );
-
-
 };
