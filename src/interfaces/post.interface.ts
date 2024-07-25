@@ -21,5 +21,6 @@ export interface PostProps {
 export interface DeletePostProps {
   idPost: string;
   setMessage: (message: string | null) => void;
+  onDeleteSuccess: (idPost: string) => void;
 }
 

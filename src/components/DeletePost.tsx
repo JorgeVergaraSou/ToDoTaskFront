@@ -2,9 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { UserContext } from '../components/UserProvider';
 import { DeletePostProps } from '../interfaces/post.interface'
 
-
-
-export const DeletePost: React.FC<DeletePostProps> = ({ idPost, setMessage }) => {
+export const DeletePost: React.FC<DeletePostProps> = ({ idPost, onDeleteSuccess, setMessage }) => {
     const context = useContext(UserContext);
     const { token } = context!;
 
@@ -23,6 +21,7 @@ export const DeletePost: React.FC<DeletePostProps> = ({ idPost, setMessage }) =>
 
                 if (response.ok) {
                     setMessage('Post deleted successfully');
+                    onDeleteSuccess(idPost); // Informar al componente padre sobre la eliminación
                 } else {
                     const errorMsg = await response.text();
                     setMessage(`Failed to delete post: ${errorMsg}`);
@@ -33,7 +32,7 @@ export const DeletePost: React.FC<DeletePostProps> = ({ idPost, setMessage }) =>
         };
 
         deletePost();
-    }, [idPost, token, setMessage]);
+    }, [idPost, token, setMessage, onDeleteSuccess]);
 
     return null;
 };
