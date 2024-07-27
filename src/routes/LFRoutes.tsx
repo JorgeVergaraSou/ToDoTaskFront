@@ -3,7 +3,6 @@ import { basePathName, routes } from '../constants'
 import { Perfil } from '../pages/Perfil'
 import {
   Contacto,
-  CrearMascota,
   CrearRaza,
   Inicio,
   Login,
@@ -58,15 +57,6 @@ const LFRoutes: RoutesType[] = [
     ),
     path: routes.pets.url,
     key: routes.pets.url
-  },
-  {
-    element: (
-      <Layout>
-        <CrearMascota />
-      </Layout>
-    ),
-    path: routes.nuevamascota.url,
-    key: routes.nuevamascota.url
   },
   {
     element: (

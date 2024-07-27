@@ -7,8 +7,8 @@ export const Registro: React.FC = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState<string[]>([]);
   const [message, setMessage] = useState<string[]>([]);
-  const [name, setName] = useState<string>('test');
-  const [email, setEmail] = useState<string>('test@test.com');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +16,7 @@ export const Registro: React.FC = () => {
     setErrors([]);
     setMessage([]);
 
-    const responseRegister = await fetch(`http://localhost:3006/api/v1/auth/register`, {
+    const responseRegister = await fetch(`http://localhost:3008/task/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

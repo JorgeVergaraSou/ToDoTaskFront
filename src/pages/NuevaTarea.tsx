@@ -1,52 +1,33 @@
 import React, { useState, useContext } from 'react';
 import { UserContext } from '../components/UserProvider';
-import TypePetSelect from '../components/PetSelected';
-import { PetEnum } from '../utils/pets.enum';
-import { SelectBreeds } from '../components/Breeds';
 import { PostProps } from '../interfaces/post.interface';
 
-export const CrearMascota: React.FC<PostProps> = ({ idPost, onCloseModal }) => {
+export const NuevaTarea: React.FC<PostProps> = ({ onCloseModal }) => {
   const { token } = useContext(UserContext)!;
   const [errors, setErrors] = useState<string[]>([]);
   const [message, setMessage] = useState<string[]>([]);
-  const [namePets, setNamePets] = useState<string>('');
-  const [age, setAge] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [image, setImage] = useState<File | null>(null);
-  const [selectedPet, setSelectedPet] = useState<PetEnum>(PetEnum.SELECCION);
-  const handleTypePetChange = (typePet: PetEnum) => {
-    setSelectedPet(typePet);
-  };
-
-  const [selectedBreed, setSelectedBreed] = useState<string>('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrors([]);
   
-    const formData = new FormData();
-    formData.append('namePet', namePets);
-    formData.append('pet', selectedPet);
-    formData.append('age', age);
-    formData.append('description', description);
-    formData.append('breed', selectedBreed);
-  
-    if (image) {
-      formData.append('image', image);
-    }
-    if (idPost !== null) {
-      formData.append('idPost', idPost.toString());
-    }
   
     try {
       const responseNewPet = await fetch(
-        `http://localhost:3006/api/v1/pets/newPet`,
+        `http://localhost:3008/task/task/newTask`,
         {
           method: 'POST',
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
           },
-          body: formData,
+          body: JSON.stringify({
+            title,
+            description
+            
+          })
         }
       );
   
@@ -76,44 +57,24 @@ export const CrearMascota: React.FC<PostProps> = ({ idPost, onCloseModal }) => {
   return (
     <>
      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg space-y-4">
-  <div>
-    <input
-      type="text"
-      placeholder="Nombre mascota"
-      name="namePets"
-      className="form-control mb-2 w-full border border-gray-300 rounded-lg p-2"
-      value={namePets}
-      onChange={(event) => setNamePets(event.target.value)}
-    />
-  </div>
-
-  <div>
-    <label htmlFor="typePost" className="block text-sm font-medium text-orange-600">Tipo de Mascota</label>
-    <div className="mt-1 w-full border border-gray-300 rounded-lg p-2">
-      <TypePetSelect selectedPet={selectedPet} onChange={handleTypePetChange} />
-    </div>
-  </div>
-
-  <div>
-    <div className="mt-1 w-full border border-gray-300 rounded-lg p-2">
-      <SelectBreeds selectedBreed={selectedBreed} setSelectedBreed={setSelectedBreed} />
-    </div>
-  </div>
-
-  <div>
-    <input
-      type="number"
-      placeholder="Edad"
-      name="age"
-      className="form-control mb-2 w-full border border-gray-300 rounded-lg p-2"
-      value={age}
-      onChange={(event) => setAge(event.target.value)}
-    />
-  </div>
-
+     <div className='mb-3'>
+            <label
+              htmlFor='breed-title'
+              className='block text-gray-700 text-md font-bold mb-2'>
+              Título
+            </label>
+            <input
+              type='text'
+              placeholder='Título de la tarea'
+              name='title'
+              className='form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+            />
+          </div>
   <div>
     <textarea
-      placeholder="Contenido"
+      placeholder="Tarea"
       name="content"
       className="form-control mb-2 w-full border border-gray-300 rounded-lg p-2"
       value={description}
@@ -121,17 +82,13 @@ export const CrearMascota: React.FC<PostProps> = ({ idPost, onCloseModal }) => {
     />
   </div>
 
-  <div className="mb-3">
-    <label htmlFor="formFile" className="block text-sm font-medium text-orange-600">Foto</label>
-    <input className="form-control w-full border border-gray-300 rounded-lg p-2" type="file" onChange={(event) => setImage(event.target.files?.[0] || null)} />
-  </div>
 
   <div>
     <button
       type="submit"
       className="btn btn-primary bg-orange-600 text-white font-bold py-2 px-4 rounded-lg"
     >
-      Crear Mascota
+      Nueva Tarea
     </button>
   </div>
 </form>

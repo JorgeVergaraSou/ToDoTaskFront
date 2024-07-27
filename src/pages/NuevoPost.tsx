@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Modal from 'react-modal';
-import { CrearMascota } from './CrearMascota';
-import { typePostEnum } from '../utils/title.enum';
+
 import { UserContext } from '../components/UserProvider'; // Importa el contexto de usuario
 import TypePostSelect from '../components/TypePostSelect';
 import { Title } from '../components/Title';
@@ -17,11 +16,7 @@ export const NuevoPost: React.FC = () => {
     const [content, setContent] = useState<string>("");
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false); // Estado para controlar el modal
     const [idPost, setIdPost] = useState<number | null>(null); // Estado para guardar el ID del post creado
-    const [selectedTypePost, setSelectedTypePost] = useState<typePostEnum>(typePostEnum.SELECCION);
 
-    const handleTypePostChange = (typePost: typePostEnum) => {
-        setSelectedTypePost(typePost);
-    };
 
     const validateForm = () => {
         const newErrors: string[] = [];
@@ -34,9 +29,7 @@ export const NuevoPost: React.FC = () => {
             newErrors.push("El contenido no puede estar vacío");
         }
 
-        if (selectedTypePost === typePostEnum.SELECCION) {
-            newErrors.push("Debe seleccionar un tipo de publicación");
-        }
+
 
         setErrors(newErrors);
         return newErrors.length === 0;
@@ -62,7 +55,7 @@ export const NuevoPost: React.FC = () => {
                     body: JSON.stringify({
                         title,
                         content,
-                        selectedTypePost,
+                        
                     }),
                 }
             );
@@ -87,7 +80,7 @@ export const NuevoPost: React.FC = () => {
             // RESETEAR FORM AL ENVIAR
             setTitle("");
             setContent("");
-            setSelectedTypePost(typePostEnum.SELECCION);
+            
             setErrors([]);
             setMessage([]);
         } catch (error) {
@@ -98,6 +91,9 @@ export const NuevoPost: React.FC = () => {
     const handleModalClose = () => {
         setModalIsOpen(false);
     };
+/*
+
+*/
 
     return (
         <>
@@ -128,12 +124,7 @@ export const NuevoPost: React.FC = () => {
            
             <div className='mb-4'>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label htmlFor="typePost" className="block text-sm font-medium text-orange-600">Tipo de Publicación</label>
-                        <div className="mt-1 w-full border border-gray-300 rounded-lg p-2">
-                            <TypePostSelect selectedTypePost={selectedTypePost} onChange={handleTypePostChange} />
-                        </div>
-                    </div>
+
                     <div>
                         <label htmlFor="Título" className="block text-sm font-medium text-orange-600">Título</label>
                         <input
@@ -166,16 +157,7 @@ export const NuevoPost: React.FC = () => {
 
 
 
-            <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={() => setModalIsOpen(false)}
-                contentLabel="Crear Mascota"
-                className="fixed inset-0 flex items-center justify-center p-4"
-                overlayClassName="fixed inset-0 bg-gray-500 bg-opacity-75"
-            >
-                <CrearMascota idPost={idPost} setIdPost={setIdPost} onCloseModal={handleModalClose} />
-                <button onClick={() => setModalIsOpen(false)} className="mt-4 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar</button>
-            </Modal>
+
 
 
             </div>

@@ -26,8 +26,5 @@
   },
   "include": ["src"],
   "exclude": ["node_modules"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "paths": {
-    "@images/*": ["./img/*"]
-  }
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -19,7 +19,7 @@ export const Login: React.FC = () => {
     setError('');
 
     const promiseLogin = await fetch(
-      `http://localhost:3006/api/v1/auth/login`,
+      `http://localhost:3008/task/auth/login`,
       {
         method: 'POST',
         headers: {
@@ -38,7 +38,7 @@ export const Login: React.FC = () => {
       localStorage.setItem('token', responseLogin.token);
 
       const promiseProfile = await fetch(
-        `http://localhost:3006/api/v1/auth/profile`,
+        `http://localhost:3008/task/auth/profile`,
         {
           method: 'GET',
           headers: {

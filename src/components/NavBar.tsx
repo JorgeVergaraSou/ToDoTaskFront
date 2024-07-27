@@ -17,11 +17,8 @@ export const NavBar: React.FC = () => {
 
   // Array containing navigation items
   const navItems = [
-    { id: 1, text: 'Mascotas', url: routes.pets.url },
-    { id: 2, text: 'Nosotros', url: routes.about.url },
-    { id: 3, text: 'Contacto', url: routes.contact.url },
     {
-      id: 5,
+      id: 1,
       text: 'Login',
       logedInText: 'Perfil',
       url: routes.login.url,
@@ -29,23 +26,13 @@ export const NavBar: React.FC = () => {
     }
   ]
 
-  // useEffect(() => {
-  //   console.log(user)
-  // }, [user])
 
   return (
-    <div className='text-white bg-two-dogs bg-two-dogs-mobile bg-cover md:bg-two-dogs-desk md:bg-auto'>
+    <div>
       <div className='flex justify-between items-center h-28 max-w-[1240px] mx-auto px-4'>
         {/* Logo */}
         <div>
-          <NavButton to={routes.home.url}>
-            {/* <!-- Heroicon - Chip Outline --> */}
-            <img
-              className='img-fluid mx-auto w-8 h-8'
-              src={imgUrl}
-              alt='logo'
-            />
-          </NavButton>
+
         </div>
         {/* Desktop Navigation */}
         <ul className='hidden md:flex font-semibold justify-between mb-0 h-full'>

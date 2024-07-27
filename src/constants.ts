@@ -11,9 +11,6 @@ export const routes = {
   login: {
     url: '/login'
   },
-  nuevamascota: {
-    url: '/nuevamascota'
-  },
   nuevaraza: {
     url: '/nuevaraza'
   },
